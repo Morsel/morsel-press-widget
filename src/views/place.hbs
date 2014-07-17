@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="Morsel.pressWidget" ng-controller="PressWidgetCtrl">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title ng-bind="pageTitle">Morsels</title>
+    <!-- compiled CSS -->
+    <% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="/<%= file %>" />
+    <% }); %>
+    <!-- compiled JavaScript -->
+    <% scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="/<%= file %>"></script>
+    <% }); %>
+    {{#ifCond nodeEnv 'production'}}
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-47265014-1', {
+        'storage': 'none'
+      });
+      ga('send', 'pageview');
+
+    </script>
+    {{/ifCond}}
+  </head>
+  <body>
+    <div class="container">
+      <div class="morsel-container">
+        <div ui-view="main"></div>
+        <div id="morsel-full-container" class="morsel-full-container">
+          <span href="#" class="close-btn">&times;</span>
+          <div id="morsel-full-slide" class="morsel-full-slide">
+            <div class="loader"></div>
+          </div>
+        </div>
+      </div>
+      <div class="powered-by-morsel">
+        <p>Powered by<a href="http://www.eatmorsel.com/?utm_source=mfk&utm_medium=link&utm_campaign=widget-powered-by-logo" target="_blank">Morsel</a></p>
+      </div>
+    </div>
+    <script>
+      var morselConfig = {
+        placeId: {{{placeId}}},
+        apiUrl: '{{{apiUrl}}}'
+      };
+    </script>
+    <!--<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.1/jquery.xdomainrequest.min.js"></script>
+    <script type="text/javascript" src="/js/iframeResizer.contentWindow.min.js"></script>
+    <script type="text/javascript" src="/js/scripts.js"></script>-->
+  </body>
+</html>

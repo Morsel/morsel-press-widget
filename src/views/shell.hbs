@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  </head>
+  <body style="background-color: white;">
+    <header style="text-align:center">
+      <h1>This is a fake website shell that shows what it would look like if the morsel press widget was on a site</h1>
+    </header>
+    <div style="max-width:1200;margin:0 auto;">
+      <div style="padding:0;max-width:960px;margin:0 auto;border:0;height:100%">
+        {{#ifCond nodeEnv 'production'}}
+        <iframe id="morsel-iframe" border="0" frameborder="0" SCROLLING="no" style="border:0 none" src="{{{siteUrl}}}/places/{{{placeId}}}" width="100%"></iframe>
+        {{else}}
+        <iframe id="morsel-iframe" border="0" frameborder="0" SCROLLING="no" style="border:0 none" src="/places/{{{placeId}}}" width="100%"></iframe>
+        {{/ifCond}}
+      </div>
+    </div>
+    <footer>
+      <h2>I'm a footer!</h2>
+    </footer>
+  </body>
+</html>
