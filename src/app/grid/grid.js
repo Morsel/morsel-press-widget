@@ -1,19 +1,19 @@
-angular.module( 'Morsel.pressWidget.home', [
+angular.module( 'Morsel.pressWidget.grid', [
   'ui.router'
 ])
 .config(function config( $stateProvider ) {
-  $stateProvider.state( 'home', {
-    url: '/home',
+  $stateProvider.state( 'grid', {
+    url: '/grid',
     views: {
       "main": {
-        controller: 'HomeCtrl',
-        templateUrl: 'home/home.tpl.html'
+        controller: 'GridCtrl',
+        templateUrl: 'grid/grid.tpl.html'
       }
     },
-    data:{ pageTitle: 'Home' }
+    data:{ pageTitle: 'Grid' }
   });
 })
 
-.controller( 'HomeCtrl', function HomeCtrl( $scope ) {
+.controller( 'GridCtrl', function GridCtrl( $scope ) {
 });
 

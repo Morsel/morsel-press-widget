@@ -1,12 +1,12 @@
 angular.module( 'Morsel.pressWidget', [
   'templates-app',
   'templates-common',
-  'Morsel.pressWidget.home',
+  'Morsel.pressWidget.grid',
   'ui.router'
 ])
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
-  $urlRouterProvider.otherwise( '/home' );
+  $urlRouterProvider.otherwise( '/grid' );
 })
 
 .run( function run () {
