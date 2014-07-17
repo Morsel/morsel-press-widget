@@ -18,7 +18,5 @@ angular.module( 'Morsel.pressWidget', [
       $scope.pageTitle = toState.data.pageTitle + ' | Morsel' ;
     }
   });
-})
-
-;
+});
 
