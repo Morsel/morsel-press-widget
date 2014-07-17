@@ -31,7 +31,8 @@ angular.module( 'Morsel.pressWidget.grid', [
       });
     }
     $scope.grid.gridItems = morsels;
-    $scope.grid.loadingThumbs = false;
+
+    //$scope.grid.loadingThumbs = false;
     $scope.grid.loadingData = false;
   });
 });

@@ -9,5 +9,5 @@
     <h3 class="grid-morsel-creator" ng-bind="morsel.creator.first_name+' '+morsel.creator.last_name"></h3>
   </div>
   <div class="grid-morsel-bg"></div>
-  <div class="grid-morsel-img" style="background-image:url({{morsel.coverPhoto}})"></div>
+  <div class="grid-morsel-img" ng-style="morsel.coverPhotoStyle"></div>
 </div>

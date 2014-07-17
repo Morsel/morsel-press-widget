@@ -8,16 +8,30 @@ angular.module( 'Morsel.common.grid.morsel', [] )
     },
     replace: true,
     link: function(scope, element, attrs) {
-      scope.morsel.coverPhoto = getCoverPhoto();
+      var coverPhotoBig = getCoverPhoto(true),
+          imagePreload;
 
-      function getCoverPhoto() {
+      scope.morsel.coverPhotoStyle = {'background-image':'url('+getCoverPhoto()+')'};
+
+      imagePreload = angular.element('<div><img src="'+coverPhotoBig+'" /></div>');
+      imagesLoaded(imagePreload, _.defer(function(){
+        scope.morsel.coverPhotoStyle = {'background-image':'url('+coverPhotoBig+')'};
+        scope.$apply();
+      }));
+
+      function getCoverPhoto(big) {
         var primaryItemPhotos;
 
-        primaryItemPhotos = findPrimaryItemPhotos(scope.morsel);
-        return primaryItemPhotos ? primaryItemPhotos._320x320 : null;
+        primaryItemPhotos = findPrimaryItemPhotos();
+
+        if(big) {
+          return primaryItemPhotos ? primaryItemPhotos._320x320 : null;
+        } else {
+          return primaryItemPhotos ? primaryItemPhotos._50x50 : null;
+        }
       }
 
-      function findPrimaryItemPhotos(morsel) {
+      function findPrimaryItemPhotos() {
         var pMorsel;
 
         pMorsel = _.find(scope.morsel.items, function(i) {
