@@ -2,7 +2,10 @@ angular.module( 'Morsel.pressWidget', [
   'templates-app',
   'templates-common',
   'Morsel.pressWidget.grid',
-  'ui.router'
+  'ui.router',
+
+  //common
+  'Morsel.common.grid.morsel'
 ])
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {

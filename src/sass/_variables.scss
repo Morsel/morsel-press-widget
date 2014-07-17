@@ -43,7 +43,7 @@ $icon-font-path:              "vendor/";
 $body-bg: white;
 
 //typography
-$headings-color: $morsel-medium;
+$headings-color: white;
 $headings-font-family: $font-family-secondary;
 $headings-font-weight: 700;
 
@@ -53,6 +53,8 @@ $font-size-h3: 20px;
 $font-size-h4: 20px;
 $font-size-h5: 18px;
 $font-size-h6: 14px;
+
+$line-height-computed: 0;
 
 $link-color: $morsel-primary-light;
 $text-color: $morsel-dark;

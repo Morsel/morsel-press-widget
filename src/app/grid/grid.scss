@@ -1,1 +1,54 @@
+.mrsl-grid-container {
+  overflow: hidden;
+  margin-bottom: 10px;
+}
 
+.mrsl-grid-container .loader {
+  display: none;
+}
+
+.mrsl-grid-container.loading-data {
+  height: 300px;
+  background-size: cover;
+}
+
+.mrsl-grid-container.loading-data .loader {
+  display: block;
+}
+
+.mrsl-grid-container.loading-thumbs .grid-morsel-wrap {
+  background-color: transparent;
+}
+
+.mrsl-grid-container.loading-thumbs .grid-morsel-bg {
+  display: none;
+}
+
+.grid-item {
+  width: 100%;
+  float: left;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+  padding: 1px;
+}
+
+@media (min-width: $screen-xs) {
+  .mrsl-grid-container.loading-data {
+    height: 400px;
+  }
+
+  .grid-item {
+    width: 50%;
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .mrsl-grid-container.loading-data {
+    height: 640px;
+  }
+
+  .grid-item {
+    width: 33.3333%;
+  }
+}

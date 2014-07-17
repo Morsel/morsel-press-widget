@@ -13,9 +13,12 @@
       <div style="padding:0;max-width:960px;margin:0 auto;border:0;height:100%">
         {{#ifCond nodeEnv 'production'}}
         <iframe id="morsel-iframe" border="0" frameborder="0" SCROLLING="no" style="border:0 none" src="{{{siteUrl}}}/places/{{{placeId}}}" width="100%"></iframe>
+        <script type="text/javascript" src="{{{siteUrl}}}/assets/js/iframeResizer.min.js"></script>
         {{else}}
         <iframe id="morsel-iframe" border="0" frameborder="0" SCROLLING="no" style="border:0 none" src="/places/{{{placeId}}}" width="100%"></iframe>
+        <script type="text/javascript" src="/assets/js/iframeResizer.min.js"></script>
         {{/ifCond}}
+        <script>iFrameResize({heightCalculationMethod:'max'});</script>
       </div>
     </div>
     <footer>

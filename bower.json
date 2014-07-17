@@ -10,5 +10,7 @@
     "bootstrap-sass-official": "~3.2.0"
   },
   "dependencies": {
+    "iframe-resizer": "~2.5.2",
+    "underscore": "~1.6.0"
   }
 }
