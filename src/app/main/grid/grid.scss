@@ -1,27 +1,29 @@
 .mrsl-grid-container {
   overflow: hidden;
   margin-bottom: 10px;
-}
 
-.mrsl-grid-container .loader {
-  display: none;
-}
+  &.loading-data {
+    height: 300px;
+    background-size: cover;
 
-.mrsl-grid-container.loading-data {
-  height: 300px;
-  background-size: cover;
-}
+    .loader {
+      display: block;
+    }
 
-.mrsl-grid-container.loading-data .loader {
-  display: block;
-}
+    &.loading-thumbs {
+      .grid-morsel-wrap {
+        background-color: transparent;
+      }
 
-.mrsl-grid-container.loading-thumbs .grid-morsel-wrap {
-  background-color: transparent;
-}
+      .grid-morsel-bg {
+        display: none;
+      }
+    }
+  }
 
-.mrsl-grid-container.loading-thumbs .grid-morsel-bg {
-  display: none;
+  .loader {
+    display: none;
+  }
 }
 
 .grid-item {

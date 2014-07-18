@@ -1,18 +1,4 @@
-angular.module( 'Morsel.pressWidget.grid', [
-  'ui.router'
-])
-.config(function config( $stateProvider ) {
-  $stateProvider.state( 'grid', {
-    url: '/grid',
-    views: {
-      "main": {
-        controller: 'GridCtrl',
-        templateUrl: 'grid/grid.tpl.html'
-      }
-    },
-    data:{ pageTitle: 'Grid' }
-  });
-})
+angular.module( 'Morsel.pressWidget.grid', [])
 
 .controller( 'GridCtrl', function GridCtrl( $scope, $timeout, $http ) {
   $scope.grid = {
