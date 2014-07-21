@@ -2,15 +2,25 @@ angular.module( 'Morsel.pressWidget', [
   'templates-app',
   'templates-common',
   'Morsel.pressWidget.grid',
-  'Morsel.pressWidget.main',
-  'Morsel.pressWidget.overlay',
+  'Morsel.pressWidget.modal',
   'ui.router',
 
   //common
-  'Morsel.common.grid.morsel'
+  'Morsel.common.grid.morsel',
+  'Morsel.common.offset',
+  'Morsel.common.modal.morsel'
 ])
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
+  $stateProvider.state( 'main', {
+    views: {
+      "grid": {
+        controller: 'GridCtrl',
+        templateUrl: 'grid/grid.tpl.html'
+      }
+    },
+    data:{ pageTitle: 'Main' }
+  });
 })
 
 .run( function run () {
@@ -21,10 +31,6 @@ angular.module( 'Morsel.pressWidget', [
     if ( angular.isDefined( toState.data.pageTitle ) ) {
       $scope.pageTitle = toState.data.pageTitle + ' | Morsel' ;
     }
-  });
-
-  $scope.$on('expandUp', function(data) {
-    $scope.$broadcast('expandDown', data);
   });
 
   $state.go('main');

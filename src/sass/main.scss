@@ -42,7 +42,7 @@
 //@import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/close";
 
 // Components w/ JavaScript
-//@import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/modals";
+@import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/modals";
 //@import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/tooltip";
 //@import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/popovers";
 //@import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/carousel";
@@ -52,5 +52,7 @@
 //@import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/responsive-utilities";
 
 @import '_press-widget';
-@import '../app/main/grid/grid';
+@import '../app/grid/grid';
+@import '../app/modal/modal';
 @import '../common/gridItems/morsel/gridMorsel';
+@import '../common/modalItems/morsel/modalMorsel';

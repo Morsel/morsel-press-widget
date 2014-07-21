@@ -1,0 +1,75 @@
+/*$scope.$on('expandDown', function(e, data) {
+    var startingEl = data.positionEl[0],
+        startHeight = startingEl.clientHeight + 2, //2 for gridItem padding
+        startWidth = startingEl.clientWidth + 2, //2 for gridItem padding
+        startTop = startingEl.offsetTop,
+        startLeft = startingEl.offsetLeft;
+
+    //expose this for the directive
+    $scope.dataPromise = $q.defer();
+    $scope.closeOverlay = closeOverlay;
+
+    //type determines which directive gets loaded
+    $scope.type = data.type;
+    //id of whatever data type the directive corresponds to
+    $scope.id = data.id;
+
+    //move to the close button to the top right
+    $scope.closeBtnStyle = {
+      top: startTop + 10 + 'px'
+    };
+
+    //set the initial starting position of the overlay
+    $scope.wrapStyle = {
+      top: startTop + 'px',
+      left: startLeft + 'px',
+      width: startWidth + 'px',
+      height: startHeight + 'px'
+    };
+
+    //kick off expanding css transitions
+    $scope.expanding = true;
+
+    //wait a cycle and change css to trigger animations
+    _.defer(function(){
+      var halfSecondPromise = $q.defer(),
+          promises = [halfSecondPromise.promise, $scope.dataPromise.promise];
+
+      $q.all(promises).then(function(){
+        //we're all set to display contents of overlay
+        $scope.$broadcast('overlay.'+data.type+'.displayData');
+        //hide loader, show full overlay
+        $scope.expanded = true;
+        $scope.expanding = false;
+      }, function(){
+        $scope.overlay.displayData = true;
+        alert('Oops! Something went wrong. Please try again or try refreshing the page');
+      });
+
+      //set a promise for a half second from now, so CSS transition can fully run
+      $timeout(function(){
+        halfSecondPromise.resolve();
+      }, 500);
+
+      $scope.wrapStyle = {
+        top: startTop + 'px',
+        left: 0,
+        width: '100%',
+        height: startHeight + 'px'
+      };
+    });
+  });
+
+  function closeOverlay() {
+    $scope.expanding = false;
+    $scope.expanded = false;
+    //$morselFullSlide.html('<div class="loader"></div>');
+  }*/
+
+
+  <!--<div class="mrsl-full-container" ng-class="{'expanding':expanding, 'expanded':expanded}">
+  <span class="close-btn" ng-style="closeBtnStyle" ng-click="closeOverlay()">&times;</span>
+  <div class="mrsl-full-wrap" ng-style="wrapStyle">
+    <div ng-if="type === 'morsel'" mrsl-overlay-morsel="id" mrsl-overlay-data-promise="dataPromise"></div>
+  </div>
+</div>-->

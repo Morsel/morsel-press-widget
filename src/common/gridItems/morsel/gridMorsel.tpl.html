@@ -1,4 +1,4 @@
-<div class="grid-morsel" id="morsel-{{morsel.id}}">
+<div class="grid-morsel" ng-click="expandMorsel()">
   <div class="grid-morsel-title-wrap">
     <div class="grid-morsel-title">
       <h2 class="grid-morsel-title-text" ng-bind="morsel.title"></h2>
@@ -9,5 +9,5 @@
     <h3 class="grid-morsel-creator" ng-bind="morsel.creator.first_name+' '+morsel.creator.last_name"></h3>
   </div>
   <div class="grid-morsel-bg"></div>
-  <div class="grid-morsel-img" ng-style="morsel.coverPhotoStyle"></div>
+  <div class="grid-morsel-img" ng-style="coverPhotoStyle"></div>
 </div>

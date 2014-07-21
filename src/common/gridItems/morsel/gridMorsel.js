@@ -11,11 +11,13 @@ angular.module( 'Morsel.common.grid.morsel', [] )
       var coverPhotoBig = getCoverPhoto(true),
           imagePreload;
 
-      scope.morsel.coverPhotoStyle = {'background-image':'url('+getCoverPhoto()+')'};
+      scope.positionEl = element.parent();
+      
+      scope.coverPhotoStyle = {'background-image':'url('+getCoverPhoto()+')'};
 
       imagePreload = angular.element('<div><img src="'+coverPhotoBig+'" /></div>');
       imagesLoaded(imagePreload, _.defer(function(){
-        scope.morsel.coverPhotoStyle = {'background-image':'url('+coverPhotoBig+')'};
+        scope.coverPhotoStyle = {'background-image':'url('+coverPhotoBig+')'};
         scope.$apply();
       }));
 
@@ -44,6 +46,14 @@ angular.module( 'Morsel.common.grid.morsel', [] )
           return null;
         }
       }
+
+      scope.expandMorsel = function(e) {
+        scope.$emit('expand', {
+          type: 'morsel',
+          id: scope.morsel.id,
+          positionEl: scope.positionEl
+        });
+      };
     },
     templateUrl: 'gridItems/morsel/gridMorsel.tpl.html'
   };
