@@ -158,7 +158,7 @@ angular.module('Morsel.pressWidget.modal', ['ui.bootstrap.transition'])
   };
 }])
 
-.directive('modalWindow', ['$modalStack', '$timeout', function ($modalStack, $timeout) {
+.directive('modalWindow', ['$modalStack', '$timeout', 'EXPANDED_MODAL_HEIGHT', function ($modalStack, $timeout, EXPANDED_MODAL_HEIGHT) {
   return {
     restrict: 'EA',
     scope: {
@@ -171,11 +171,40 @@ angular.module('Morsel.pressWidget.modal', ['ui.bootstrap.transition'])
       return tAttrs.templateUrl || 'modal/modalWindow.tpl.html';
     },
     link: function (scope, element, attrs) {
+      var $positionEl = $(scope.$parent.positionEl),
+          position = $positionEl.position(),
+          $grid = $('#mrsl-grid-container'),
+          gridHeight = $grid.height(),
+          modalTopPosition;
+
       element.addClass(attrs.windowClass || '');
+
+      //if it's too close to the bottom to fit
+      if(position.top >= gridHeight - EXPANDED_MODAL_HEIGHT) {
+        //align it at the bottom
+        modalTopPosition = gridHeight - EXPANDED_MODAL_HEIGHT;
+      } else {
+        //align it to the top of the expanding gridItem
+        modalTopPosition = position.top;
+      }
+
+      //yeh, this is ugly
+      scope.modalPosition = {
+        top: modalTopPosition + 'px',
+        left: position.left + 'px',
+        width: $positionEl.width() + 'px',
+        height: $positionEl.height() + 'px'
+      };
 
       $timeout(function () {
         // trigger CSS transitions
         scope.animate = true;
+        scope.modalPosition = {
+          top: modalTopPosition + 'px',
+          left: 0,
+          width: '100%',
+          height: EXPANDED_MODAL_HEIGHT + 'px'
+        };
         // focus a freshly-opened modal
         element[0].focus();
       });
@@ -220,7 +249,7 @@ angular.module('Morsel.pressWidget.modal', ['ui.bootstrap.transition'])
 
     function removeModalWindow(modalInstance) {
 
-      var body = $document.find('body').eq(0);
+      var body = $document.find('modalBackdrop').eq(0);
       var modalWindow = openedWindows.get(modalInstance).value;
 
       //clean up the stack
@@ -302,7 +331,7 @@ angular.module('Morsel.pressWidget.modal', ['ui.bootstrap.transition'])
         keyboard: modal.keyboard
       });
 
-      var body = $document.find('body').eq(0),
+      var body = $document.find('modalBackdrop').eq(0),
           currBackdropIndex = backdropIndex();
 
       if (currBackdropIndex >= 0 && !backdropDomEl) {

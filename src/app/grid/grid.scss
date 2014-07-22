@@ -3,7 +3,7 @@
   margin-bottom: 10px;
 
   &.loading-data {
-    height: 300px;
+    height: $grid-item-height;
     background-size: cover;
 
     .loader {
@@ -29,7 +29,7 @@
 .grid-item {
   width: 100%;
   float: left;
-  height: 300px;
+  height: $grid-item-height;
   position: relative;
   overflow: hidden;
   padding: 1px;

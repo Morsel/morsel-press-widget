@@ -7,9 +7,10 @@ angular.module( 'Morsel.pressWidget', [
 
   //common
   'Morsel.common.grid.morsel',
-  'Morsel.common.offset',
   'Morsel.common.modal.morsel'
 ])
+
+.constant('EXPANDED_MODAL_HEIGHT', 390)
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
   $stateProvider.state( 'main', {

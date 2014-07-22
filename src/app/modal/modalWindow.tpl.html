@@ -1,5 +1,6 @@
-<div tabindex="-1" role="dialog" class="modal fade" ng-class="{in: animate}" ng-style="{'z-index': 1050 + index*10, display: 'block'}" ng-click="close($event)">
-  <div class="modal-dialog">
+<div tabindex="-1" role="dialog" class="modal" ng-class="{in: animate}" ng-style="{'z-index': 1050 + index*10, display: 'block'}" ng-click="close($event)">
+  <div class="modal-dialog" ng-style="modalPosition">
+    <span class="close" ng-click="close($event)">&times;</span>
     <div class="modal-content" ng-transclude></div>
   </div>
 </div>

@@ -1,6 +1,6 @@
 angular.module( 'Morsel.common.modal.morsel', [] )
 
-.directive('mrslModalMorsel', function($http){
+.directive('mrslModalMorsel', function($http, $q, $timeout, EXPANDED_MODAL_HEIGHT){
   return {
     restrict: 'A',
     scope: {
@@ -12,17 +12,22 @@ angular.module( 'Morsel.common.modal.morsel', [] )
       var tempMorsel,
           morselPlaceholderUrl = '/assets/images/util/morsel-placeholder_480x480.jpg',
           transformProperty,
-          morselHeight = 390;
+          dataPromise = $q.defer(),
+          halfSecondPromise = $q.defer(),
+          promises = [dataPromise.promise, halfSecondPromise.promise];
       
-      $http.get('../../assets/cache/morsels/'+scope.id+'.json').success(function(resp){
-        tempMorsel = resp.data;
-        scope.morsel = tempMorsel;
-        //scope.dataPromise.resolve();
+      $q.all(promises).then(function(){
+        scope.showMorsel = true;
       });
 
-      scope.$on('modal.morsel.displayData', function() {
-        scope.morsel = tempMorsel;
+      $http.get('../../assets/cache/morsels/'+scope.id+'.json').success(function(resp){
+        scope.morsel = resp.data;
+        dataPromise.resolve();
       });
+
+      $timeout(function(){
+        halfSecondPromise.resolve();
+      }, 500);
 
       scope.formatDescription = function(description) {
         if(description) {
@@ -49,11 +54,11 @@ angular.module( 'Morsel.common.modal.morsel', [] )
       };
 
       scope.next = function(itemNum) {
-        element.children(1).css(transformProperty, 'translate(0, -' + ((itemNum + 1) * morselHeight) + 'px)');
+        element.children(1).css(transformProperty, 'translate(0, -' + ((itemNum + 1) * EXPANDED_MODAL_HEIGHT) + 'px)');
       };
 
       scope.prev = function(itemNum) {
-        element.children(1).css(transformProperty, 'translate(0, -' + ((itemNum - 1) * morselHeight) + 'px)');
+        element.children(1).css(transformProperty, 'translate(0, -' + ((itemNum - 1) * EXPANDED_MODAL_HEIGHT) + 'px)');
       };
 
       ['webkit', 'Moz', 'O', 'ms'].every(function (prefix) {

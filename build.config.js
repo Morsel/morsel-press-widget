@@ -28,6 +28,7 @@ module.exports = {
       'bower_components/angular-ui-utils/modules/route/route.js',
       'bower_components/iframe-resizer/js/iframeResizer.contentWindow.min.js',
       'bower_components/imagesloaded/imagesloaded.pkgd.min.js',
+      'bower_components/jquery/dist/jquery.min.js',
       'bower_components/underscore/underscore.js'
     ],
     css: [

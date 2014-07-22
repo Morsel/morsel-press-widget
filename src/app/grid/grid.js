@@ -44,5 +44,6 @@ angular.module( 'Morsel.pressWidget.grid', [])
   ModalInstanceCtrl = function ($scope, $modalInstance, gridItemData) {
     $scope.id = gridItemData.id;
     $scope.type = gridItemData.type;
+    $scope.positionEl = gridItemData.positionEl;
   };
 });

@@ -1,6 +1,6 @@
 <div class="modal-morsel-full-slide">
-  <div class="loader"></div>
-  <div ng-if="morsel" class="morsel-full">
+  <div ng-if="!morsel || !showMorsel" class="loader"></div>
+  <div ng-if="morsel && showMorsel" class="morsel-full">
     <div class="morsel-mobile-info">
       <h2 class="morsel-title" ng-bind="morsel.title"></h2>
       <div class="user">
