@@ -14,6 +14,7 @@
     "underscore": "~1.6.0",
     "imagesloaded": "~3.1.8",
     "jquery": "~2.1.1",
-    "angular-sanitize": "~1.2.20"
+    "angular-sanitize": "~1.2.20",
+    "angular-bindonce": "~0.3.1"
   }
 }

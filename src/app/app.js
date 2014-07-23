@@ -4,6 +4,7 @@ angular.module( 'Morsel.pressWidget', [
   'Morsel.pressWidget.grid',
   'Morsel.pressWidget.modal',
   'ngSanitize',
+  'pasvaz.bindonce',
   'ui.router',
 
   //common
