@@ -27,7 +27,7 @@
           <span><img ng-src="{{getUserPhoto(morsel.creator)}}" class="img-circle" /></span> {{ morsel.creator.first_name + ' ' + morsel.creator.last_name }}
         </div>
         <div class="item-description" ng-class="$last ? '' : 'small-description'">
-          <p ng-bind="formatDescription(item.description)"></p>
+          <p ng-bind-html="formatDescription(item.description)"></p>
         </div>
         <div ng-if="!$last" class="item-control next-item" ng-click="next($index)">
           <span>Next</span>

@@ -3,6 +3,7 @@ angular.module( 'Morsel.pressWidget', [
   'templates-common',
   'Morsel.pressWidget.grid',
   'Morsel.pressWidget.modal',
+  'ngSanitize',
   'ui.router',
 
   //common

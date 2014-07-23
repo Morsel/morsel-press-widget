@@ -11,8 +11,8 @@ angular.module( 'Morsel.pressWidget.grid', [])
   };
 
   //get some fake data for now
-  $http.get('../../assets/cache/morsel.json').success(function(resp){
-    var tempMorsels = resp.data,
+  $http.get('../../assets/cache/morsels.json').success(function(resp){
+    var tempMorsels = resp,
         morsels = [];
     for(var i = 0;i<tempMorsels.length;i++) {
       morsels.push({

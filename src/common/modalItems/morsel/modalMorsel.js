@@ -21,7 +21,7 @@ angular.module( 'Morsel.common.modal.morsel', [] )
       });
 
       $http.get('../../assets/cache/morsels/'+scope.id+'.json').success(function(resp){
-        scope.morsel = resp.data;
+        scope.morsel = resp;
         dataPromise.resolve();
       });
 
