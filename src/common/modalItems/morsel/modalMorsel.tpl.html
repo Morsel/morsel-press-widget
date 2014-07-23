@@ -4,7 +4,8 @@
     <div class="morsel-mobile-info">
       <h2 class="morsel-title" bo-text="morsel.title"></h2>
       <div class="user">
-        <span><img bo-src="getUserPhoto(morsel.creator)" class="img-circle"/></span> {{ morsel.creator.first_name + ' ' + morsel.creator.last_name }}
+        <div mrsl-user-image mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-xs"></div>
+        {{ morsel.creator.first_name + ' ' + morsel.creator.last_name }}
       </div>
     </div>
     <div bindonce ng-repeat="item in morsel.items" class="morsel-item">

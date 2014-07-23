@@ -47,8 +47,33 @@ img {
   margin-left: 10px;
 }
 
-.morsel-full-container {
-  display: none;
+.profile-pic-link {
+  display: inline-block;
+  padding: $profile-bic-border-width;
+
+  img {
+    @include box-shadow(0 0 0 1px hsl(0, 0%, 90%), 0 0 0 2px hsl(0, 0%, 98%));
+  }
+}
+
+.profile-pic-xs {
+  width: $profile-pic-xs;
+  height: $profile-pic-xs;
+}
+
+.profile-pic-s {
+  width: $profile-pic-s;
+  height: $profile-pic-s;
+}
+
+.profile-pic-m {
+  width: $profile-pic-m;
+  height: $profile-pic-m;
+}
+
+.profile-pic-l {
+  width: $profile-pic-l;
+  height: $profile-pic-l;
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {

@@ -7,7 +7,7 @@
   &:hover {
     cursor: pointer;
 
-    .grid-morsel-img, .user-info img {
+    .grid-morsel-img, .user-info span {
       @include filter(grayscale(0%));
       @include opacity(1);
     }
@@ -87,9 +87,7 @@
     z-index: 3;
   }
 
-  .user-info img {
-    @include box-shadow(0 0 0 1px hsl(0, 0%, 90%), 0 0 0 2px hsl(0, 0%, 98%));
-    @include border-radius(50%);
+  .user-info span {
     margin-bottom: 5px;
     @include filter(grayscale(30%));
     @include opacity(.7);

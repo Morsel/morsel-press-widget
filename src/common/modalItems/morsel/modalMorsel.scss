@@ -76,7 +76,7 @@
   }
 
   .user {
-    line-height: 40px;
+    line-height: $profile-pic-xs;
     vertical-align: middle;
     font-size: 22px;
     margin-bottom: 15px;
@@ -86,14 +86,7 @@
 
   .user span {
     display: inline-block;
-    padding: 2px;
-    float: left;
     margin-right: 12px;
-    line-height: 0;
-  }
-
-  .user span img {
-    @include box-shadow(0 0 0 1px hsl(0, 0%, 90%), 0 0 0 2px hsl(0, 0%, 98%));
   }
 }
 
