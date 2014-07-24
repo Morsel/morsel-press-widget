@@ -11,7 +11,7 @@ angular.module( 'Morsel.common.grid.morsel', [] )
       var coverPhotoBig = getCoverPhoto(true),
           imagePreload;
 
-      scope.positionEl = element.parent();
+      scope.clickedItem = element.parent();
       
       scope.coverPhotoStyle = {'background-image':'url('+getCoverPhoto()+')'};
 
@@ -51,7 +51,7 @@ angular.module( 'Morsel.common.grid.morsel', [] )
         scope.$emit('expand', {
           type: 'morsel',
           id: scope.morsel.id,
-          positionEl: scope.positionEl
+          clickedItem: scope.clickedItem
         });
       };
     },

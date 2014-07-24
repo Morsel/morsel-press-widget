@@ -1,6 +1,6 @@
 angular.module( 'Morsel.pressWidget.grid', [])
 
-.controller( 'GridCtrl', function GridCtrl( $scope, $timeout, $http, $modal ) {
+.controller( 'GridCtrl', function GridCtrl( $scope, $timeout, $http, $modal, frameCommunication ) {
   var ModalInstanceCtrl;
 
   //set some vars for our layout
@@ -28,7 +28,10 @@ angular.module( 'Morsel.pressWidget.grid', [])
 
   //listen to any events from grid items
   $scope.$on('expand', function(e, data) {
-    //pop modal
+    openModal(data);
+  });
+
+  function openModal(data) {
     var modalInstance = $modal.open({
       templateUrl: 'modal/modalContent.tpl.html',
       controller: ModalInstanceCtrl,
@@ -39,11 +42,22 @@ angular.module( 'Morsel.pressWidget.grid', [])
         }
       }
     });
-  });
+  }
 
   ModalInstanceCtrl = function ($scope, $modalInstance, gridItemData) {
     $scope.id = gridItemData.id;
     $scope.type = gridItemData.type;
-    $scope.positionEl = gridItemData.positionEl;
+    //used to start the position of the modal
+    $scope.clickedItem = gridItemData.clickedItem;
   };
+
+  frameCommunication.setup(function(params){
+    openModal({
+      id: params.id,
+      type: params.type
+    });
+
+    //return success for shell callback
+    return true;
+  });
 });

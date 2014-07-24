@@ -31,7 +31,8 @@ module.exports = {
       'bower_components/iframe-resizer/js/iframeResizer.contentWindow.min.js',
       'bower_components/imagesloaded/imagesloaded.pkgd.min.js',
       'bower_components/jquery/dist/jquery.min.js',
-      'bower_components/underscore/underscore.js'
+      'bower_components/underscore/underscore.js',
+      'bower_components/channel.min.js'
     ],
     css: [
     ],

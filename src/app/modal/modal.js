@@ -171,43 +171,60 @@ angular.module('Morsel.pressWidget.modal', ['ui.bootstrap.transition'])
       return tAttrs.templateUrl || 'modal/modalWindow.tpl.html';
     },
     link: function (scope, element, attrs) {
-      var $positionEl = $(scope.$parent.positionEl),
-          position = $positionEl.position(),
+      var $clickedItem,
           $grid = $('#mrsl-grid-container'),
           gridHeight = $grid.height(),
-          modalTopPosition;
+          modalPosition = {};
 
       element.addClass(attrs.windowClass || '');
 
-      //if it's too close to the bottom to fit
-      if(position.top >= gridHeight - EXPANDED_MODAL_HEIGHT) {
-        //align it at the bottom
-        modalTopPosition = gridHeight - EXPANDED_MODAL_HEIGHT;
-      } else {
-        //align it to the top of the expanding gridItem
-        modalTopPosition = position.top;
-      }
+      //was there a clicked item or did this come from an event
+      if(scope.$parent.clickedItem) {
+        $clickedItem = $(scope.$parent.clickedItem);
+        //this gets left and top
+        modalPosition = $clickedItem.position();
+        //get w and h
+        modalPosition.width = $clickedItem.width();
+        modalPosition.height = $clickedItem.height();
 
-      //yeh, this is ugly
-      scope.modalPosition = {
-        top: modalTopPosition + 'px',
-        left: position.left + 'px',
-        width: $positionEl.width() + 'px',
-        height: $positionEl.height() + 'px'
-      };
+        //if it's too close to the bottom to fit
+        if(modalPosition.top >= gridHeight - EXPANDED_MODAL_HEIGHT) {
+          //align it at the bottom
+          modalPosition.top = gridHeight - EXPANDED_MODAL_HEIGHT;
+        }
 
-      $timeout(function () {
-        // trigger CSS transitions
-        scope.animate = true;
+        //set initial values
         scope.modalPosition = {
-          top: modalTopPosition + 'px',
+          top: modalPosition.top + 'px',
+          left: modalPosition.left + 'px',
+          width: modalPosition.width + 'px',
+          height: modalPosition.height + 'px'
+        };
+
+        $timeout(function () {
+          // trigger CSS transitions
+          scope.animate = true;
+          scope.modalPosition = {
+            top: modalPosition.top + 'px',
+            left: 0,
+            width: '100%',
+            height: EXPANDED_MODAL_HEIGHT + 'px'
+          };
+          // focus a freshly-opened modal
+          element[0].focus();
+        });
+      } else {
+        //we came from an event, so don't animate the expansion
+        scope.modalPosition = {
+          top: 0,
           left: 0,
           width: '100%',
           height: EXPANDED_MODAL_HEIGHT + 'px'
         };
+
         // focus a freshly-opened modal
         element[0].focus();
-      });
+      }
 
       scope.close = function (evt) {
         var modal = $modalStack.getTop();

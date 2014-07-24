@@ -1,6 +1,7 @@
 angular.module( 'Morsel.pressWidget', [
   'templates-app',
   'templates-common',
+  'Morsel.presskit.frameCommunication',
   'Morsel.pressWidget.grid',
   'Morsel.pressWidget.modal',
   'ngSanitize',

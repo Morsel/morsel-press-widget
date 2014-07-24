@@ -5,8 +5,8 @@ var _ = require('underscore');
 var app = express();
 var port = Number(process.env.PORT || 5000);
 var nodeEnv = process.env.NODE_ENV || 'local';
-var apiUrl = nodeEnv === 'local' ? 'http://api-staging.eatmorsel.com' : 'http://api.eatmorsel.com';
-var siteUrl = 'http://morsel-media.herokuapp.com';
+var apiUrl = nodeEnv === 'production' ? 'http://api.eatmorsel.com' : 'http://api-staging.eatmorsel.com';
+var siteDomain = nodeEnv === 'production' ? 'http://morsel-media.herokuapp.com' : 'http://localhost:' + port;
 
 app.use(logfmt.requestLogger());
 
@@ -45,7 +45,8 @@ app.get('/places/:id', function(req, res){
   res.render('place', {
     placeId: req.params.id,
     nodeEnv: nodeEnv,
-    apiUrl: apiUrl
+    apiUrl: apiUrl,
+    siteDomain: siteDomain
   });
 });
 
@@ -54,7 +55,7 @@ app.get('/shell/:id', function(req, res){
     placeId: req.params.id,
     nodeEnv: nodeEnv,
     apiUrl: apiUrl,
-    siteUrl: siteUrl
+    siteDomain: siteDomain
   });
 });
 
