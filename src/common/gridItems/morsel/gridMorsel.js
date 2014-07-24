@@ -13,13 +13,16 @@ angular.module( 'Morsel.common.grid.morsel', [] )
 
       scope.clickedItem = element.parent();
       
-      scope.coverPhotoStyle = {'background-image':'url('+getCoverPhoto()+')'};
+      scope.coverPhotoStyle = {'background-image':'url('+getCoverPhoto(true)+')'};
 
-      imagePreload = angular.element('<div><img src="'+coverPhotoBig+'" /></div>');
-      imagesLoaded(imagePreload, _.defer(function(){
-        scope.coverPhotoStyle = {'background-image':'url('+coverPhotoBig+')'};
-        scope.$apply();
-      }));
+      /*_.defer(function() {
+        imagePreload = angular.element('<div><img src="'+coverPhotoBig+'" /></div>');
+        imagesLoaded(imagePreload, _.defer(function(){
+          scope.coverPhotoStyle = {'background-image':'url('+coverPhotoBig+')'};
+          scope.$apply();
+          imagePreload.remove();
+        }));
+      });*/
 
       function getCoverPhoto(big) {
         var primaryItemPhotos;

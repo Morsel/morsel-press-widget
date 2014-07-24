@@ -222,6 +222,9 @@ angular.module('Morsel.pressWidget.modal', ['ui.bootstrap.transition'])
           height: EXPANDED_MODAL_HEIGHT + 'px'
         };
 
+        // trigger CSS transitions (spoiler alert: there are none, but we need the animation class so the loader shows)
+        scope.animate = true;
+
         // focus a freshly-opened modal
         element[0].focus();
       }

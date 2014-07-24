@@ -14,15 +14,24 @@ angular.module( 'Morsel.common.modal.morsel', [] )
           transformProperty,
           dataPromise = $q.defer(),
           halfSecondPromise = $q.defer(),
-          promises = [dataPromise.promise, halfSecondPromise.promise];
+          imageLoadPromise = $q.defer(),
+          promises = [dataPromise.promise, halfSecondPromise.promise, imageLoadPromise.promise];
       
       $q.all(promises).then(function(){
         scope.showMorsel = true;
       });
 
       $http.get('../../assets/cache/morsels/'+scope.id+'.json').success(function(resp){
+        var firstImage;
+
         scope.morsel = resp;
         dataPromise.resolve();
+
+        firstImage = angular.element('<img src="'+scope.getItemPhoto(scope.morsel.items[0])+'"/>');
+        imagesLoaded(firstImage, function() {
+          imageLoadPromise.resolve();
+          firstImage.remove();
+        });
       });
 
       $timeout(function(){
