@@ -450,6 +450,18 @@ module.exports = function ( grunt ) {
         });
       }
     });
+
+    grunt.file.copy(grunt.config('view_dir') + '/404.hbs', this.data.dir + '/' + grunt.config('view_dir') + '/404.hbs', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            scripts: jsFiles,
+            styles: cssFiles,
+            version: grunt.config( 'pkg.version' )
+          }
+        });
+      }
+    });
   });
 
   grunt.registerMultiTask( 'karmaconfig', 'Process karma config templates', function () {

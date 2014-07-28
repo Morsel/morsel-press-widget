@@ -13,7 +13,8 @@
     "underscore": "~1.6.0",
     "hbs": "~2.7.0",
     "compression": "~1.0.8",
-    "logfmt": "~1.1.2"
+    "logfmt": "~1.1.2",
+    "request": "~2.39.0"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
