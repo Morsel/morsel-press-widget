@@ -1,6 +1,6 @@
 angular.module( 'Morsel.common.modal.morsel', [] )
 
-.directive('mrslModalMorsel', function($http, $q, $timeout, EXPANDED_MODAL_HEIGHT, morselUtils){
+.directive('mrslModalMorsel', function($http, $q, $timeout, EXPANDED_MODAL_HEIGHT, morselUtils, frameCommunication){
   return {
     restrict: 'A',
     scope: {
@@ -71,6 +71,11 @@ angular.module( 'Morsel.common.modal.morsel', [] )
 
       scope.prev = function(itemNum) {
         element.children(1).css(transformProperty, 'translate(0, -' + ((itemNum - 1) * EXPANDED_MODAL_HEIGHT) + 'px)');
+      };
+
+      scope.viewOnMorsel = function(e) {
+        e.preventDefault();
+        frameCommunication.goToUrl(scope.morsel.url);
       };
 
       ['webkit', 'Moz', 'O', 'ms'].every(function (prefix) {

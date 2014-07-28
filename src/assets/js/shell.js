@@ -7,8 +7,17 @@
 
   iFrameResize({
     heightCalculationMethod:'max',
-    initCallback: checkHash
+    initCallback: openChannel
   });
+
+  function openChannel() {
+    chan = Channel.build({
+      window: document.getElementById("morsel-iframe").contentWindow,
+      origin: siteDomain,
+      scope: "mrsl.pressKit",
+      onReady: channelConnected
+    });
+  }
 
   function checkHash() {
     var hash = decodeURIComponent(window.location.hash),
@@ -25,13 +34,18 @@
     }
   }
 
-  function openChannel() {
-    chan = Channel.build({
-      window: document.getElementById("morsel-iframe").contentWindow,
-      origin: siteDomain,
-      scope: "mrsl.pressKit",
-      onReady: fireOpenModal
+  function channelConnected() {
+    //we want this available
+    chan.bind("goToUrl", function(trans, params){
+      if(params.url) {
+        window.location = params.url;
+      } else {
+        throw 'pressWidget channel didn\'t provide a url';
+      }
     });
+
+    //check the hash to see if we should do anything right off the bat
+    checkHash();
   }
 
   function fireOpenModal() {

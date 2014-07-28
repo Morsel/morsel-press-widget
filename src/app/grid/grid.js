@@ -51,7 +51,7 @@ angular.module( 'Morsel.pressWidget.grid', [])
     $scope.clickedItem = gridItemData.clickedItem;
   };
 
-  frameCommunication.setup(function(params){
+  frameCommunication.setupOpenModal(function(params){
     openModal({
       id: params.id,
       type: params.type
