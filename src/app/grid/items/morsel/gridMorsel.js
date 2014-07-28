@@ -1,6 +1,6 @@
 angular.module( 'Morsel.common.grid.morsel', [] )
 
-.directive('mrslGridMorsel', function($timeout){
+.directive('mrslGridMorsel', function($timeout, morselUtils){
   return {
     restrict: 'A',
     scope: {
@@ -8,13 +8,12 @@ angular.module( 'Morsel.common.grid.morsel', [] )
     },
     replace: true,
     link: function(scope, element, attrs) {
-      var coverPhotoBig = getCoverPhoto(true),
-          imagePreload,
-          morselPlaceholderUrl = '/assets/images/util/morsel-placeholder_480x480.jpg';
+      var coverPhotoBig = morselUtils.getCoverPhoto(scope.morsel, '_50x50'),
+          imagePreload;
 
       scope.clickedItem = element.parent();
       
-      scope.coverPhotoStyle = {'background-image':'url('+getCoverPhoto(true)+')'};
+      scope.coverPhotoStyle = {'background-image':'url('+morselUtils.getCoverPhoto(scope.morsel, '_320x320')+')'};
 
       /*_.defer(function() {
         imagePreload = angular.element('<div><img src="'+coverPhotoBig+'" /></div>');
@@ -24,32 +23,6 @@ angular.module( 'Morsel.common.grid.morsel', [] )
           imagePreload.remove();
         }));
       });*/
-
-      function getCoverPhoto(big) {
-        var primaryItemPhotos;
-
-        primaryItemPhotos = findPrimaryItemPhotos();
-
-        if(big) {
-          return primaryItemPhotos ? primaryItemPhotos._320x320 : morselPlaceholderUrl;
-        } else {
-          return primaryItemPhotos ? primaryItemPhotos._50x50 : morselPlaceholderUrl;
-        }
-      }
-
-      function findPrimaryItemPhotos() {
-        var pMorsel;
-
-        pMorsel = _.find(scope.morsel.items, function(i) {
-          return i.id === scope.morsel.primary_item_id;
-        });
-
-        if(pMorsel && pMorsel.photos) {
-          return pMorsel.photos;
-        } else {
-          return null;
-        }
-      }
 
       scope.expandMorsel = function(e) {
         scope.$emit('expand', {

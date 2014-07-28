@@ -75,5 +75,18 @@ $grid-item-height: 300px;
 $expanded-modal-height: 390px;
 $modal-content-bg: #f3f1ef;
 
+//social
+//social
+$socialPalette: 
+  morsel $morsel-light,
+  facebook #2a5e9d,
+  twitter #00c2f6,
+  linkedin #0073a3,
+  pinterest #cd1e23,
+  stumbleupon #ff4d20,
+  google-plus #ee3e18,
+  expand #c5c5c5,
+  email $morsel-secondary;
+
 // Core Bootstrap variables and mixins
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss";

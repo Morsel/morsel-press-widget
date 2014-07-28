@@ -8,9 +8,12 @@ angular.module( 'Morsel.pressWidget', [
   'pasvaz.bindonce',
   'ui.router',
 
-  //common
+  //app
   'Morsel.common.grid.morsel',
   'Morsel.common.modal.morsel',
+  //common
+  'Morsel.common.morselUtils',
+  'Morsel.common.morselSharing',
   'Morsel.common.userImage'
 ])
 

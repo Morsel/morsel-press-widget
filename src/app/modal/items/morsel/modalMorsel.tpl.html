@@ -8,14 +8,12 @@
         {{ morsel.creator.first_name + ' ' + morsel.creator.last_name }}
       </div>
     </div>
-    <div bindonce ng-repeat="item in morsel.items" class="morsel-item">
+    <div bindonce ng-repeat="item in morsel.items" class="slide-item morsel-item">
       <hr />
-      <div>
-        <div class="item-img-wrap">
-          <div class="item-img">
-            <div>
-              <img bo-src="getItemPhoto(item)" />
-            </div>
+      <div class="item-img-wrap">
+        <div class="item-img">
+          <div>
+            <img bo-src="getItemPhoto(item)" />
           </div>
         </div>
       </div>
@@ -30,9 +28,27 @@
         <div class="item-description" bo-class="$last ? '' : 'small-description'">
           <p bo-html="formatDescription(item.description)"></p>
         </div>
-        <div bo-if="!$last" class="item-control next-item" ng-click="next($index)">
+        <div class="item-control next-item" ng-click="next($index)">
           <span>Next</span>
         </div>
+      </div>
+    </div>
+    <div class="slide-item share-item">
+      <hr />
+      <div class="item-img-wrap">
+        <div class="centered-title-wrap">
+          <div class="centered-title">
+            <h2 class="centered-title-text" bo-text="morsel.title"></h2>
+          </div>
+        </div>
+        <div class="centered-title-img" ng-style="coverPhotoStyle"></div>
+      </div>
+      <div class="item-info">
+        <div class="item-control prev-item" ng-click="prev(morsel.items.length)">
+          <span>Previous</span>
+        </div>
+        <h5 class="h2">Share this morsel:</h5>
+        <div mrsl-sharing="morsel"></div>
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 angular.module( 'Morsel.common.modal.morsel', [] )
 
-.directive('mrslModalMorsel', function($http, $q, $timeout, EXPANDED_MODAL_HEIGHT){
+.directive('mrslModalMorsel', function($http, $q, $timeout, EXPANDED_MODAL_HEIGHT, morselUtils){
   return {
     restrict: 'A',
     scope: {
@@ -32,6 +32,9 @@ angular.module( 'Morsel.common.modal.morsel', [] )
           imageLoadPromise.resolve();
           firstImage.remove();
         });
+
+        //expose this for our share page
+        scope.coverPhotoStyle = {'background-image':'url('+morselUtils.getCoverPhoto(scope.morsel, '_480x480')+')'};
       });
 
       $timeout(function(){

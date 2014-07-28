@@ -1,0 +1,8 @@
+.common-sprite {
+  display: inline-block;
+}
+
+$common-sprite-dimensions: true;
+$common-sprite-inline: false;
+@import "spritesheets/common/*.png";
+@include all-common-sprites;
