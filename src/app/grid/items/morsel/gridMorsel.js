@@ -59,6 +59,6 @@ angular.module( 'Morsel.common.grid.morsel', [] )
         });
       };
     },
-    templateUrl: 'gridItems/morsel/gridMorsel.tpl.html'
+    templateUrl: 'grid/items/morsel/gridMorsel.tpl.html'
   };
 });

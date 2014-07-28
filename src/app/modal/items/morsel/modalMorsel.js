@@ -79,6 +79,6 @@ angular.module( 'Morsel.common.modal.morsel', [] )
         return true;
       });
     },
-    templateUrl: 'modalItems/morsel/modalMorsel.tpl.html'
+    templateUrl: 'modal/items/morsel/modalMorsel.tpl.html'
   };
 });
