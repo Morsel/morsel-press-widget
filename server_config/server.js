@@ -60,6 +60,7 @@ app.get('/shell/:id', function(req, res){
 });
 
 app.get('*', function(req, res){
+  console.log(req);
   res.redirect('http://www.eatmorsel.com');
 });
 

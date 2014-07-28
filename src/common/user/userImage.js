@@ -9,7 +9,7 @@ angular.module('Morsel.common.userImage', [])
       userImageSize: '@mrslUserImageSize'
     },
     link: function(scope) {
-      var placeholderAvatarUrl = '/assets/images/utility/avatars/avatar';
+      var placeholderAvatarUrl = '/assets/images/util/avatars/avatar';
 
       scope.returnPhoto = function(){
         var photoSize;

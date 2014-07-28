@@ -9,7 +9,8 @@ angular.module( 'Morsel.common.grid.morsel', [] )
     replace: true,
     link: function(scope, element, attrs) {
       var coverPhotoBig = getCoverPhoto(true),
-          imagePreload;
+          imagePreload,
+          morselPlaceholderUrl = '/assets/images/util/morsel-placeholder_480x480.jpg';
 
       scope.clickedItem = element.parent();
       
@@ -30,9 +31,9 @@ angular.module( 'Morsel.common.grid.morsel', [] )
         primaryItemPhotos = findPrimaryItemPhotos();
 
         if(big) {
-          return primaryItemPhotos ? primaryItemPhotos._320x320 : null;
+          return primaryItemPhotos ? primaryItemPhotos._320x320 : morselPlaceholderUrl;
         } else {
-          return primaryItemPhotos ? primaryItemPhotos._50x50 : null;
+          return primaryItemPhotos ? primaryItemPhotos._50x50 : morselPlaceholderUrl;
         }
       }
 
