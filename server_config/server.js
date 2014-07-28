@@ -59,8 +59,11 @@ app.get('/shell/:id', function(req, res){
   });
 });
 
+app.get('/robots.txt', function(req, res){
+  res.sendfile('robots.txt');
+});
+
 app.get('*', function(req, res){
-  console.log(req);
   res.redirect('http://www.eatmorsel.com');
 });
 
