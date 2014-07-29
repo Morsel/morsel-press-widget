@@ -15,6 +15,14 @@ module.exports = {
     hbs: [ 'src/views/frame.hbs', 'src/views/shell.hbs' ],
     sass: 'src/sass/main.scss'
   },
+  shell_files: {
+    js: [
+      'bower_components/iframe-resizer/js/iframeResizer.min.js',
+      'bower_components/jschannel/src/jschannel.js',
+      'src/assets/js/shell.js'
+    ],
+    css: []
+  },
   test_files: {
     js: [
       'bower_components/angular-mocks/angular-mocks.js'
@@ -34,8 +42,8 @@ module.exports = {
       'bower_components/imagesloaded/imagesloaded.pkgd.min.js',
       'bower_components/jquery/dist/jquery.min.js',
       'bower_components/jquery/dist/jquery.min.map',
-      'bower_components/underscore/underscore.js',
-      'bower_components/channel.min.js'
+      'bower_components/jschannel/src/jschannel.js',
+      'bower_components/underscore/underscore.js'
     ],
     css: [
     ],
