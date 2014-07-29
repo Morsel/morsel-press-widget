@@ -10,6 +10,9 @@
     <% styles.forEach( function ( file ) { %>
     <link rel="stylesheet" type="text/css" href="/<%= file %>" />
     <% }); %>
+    <!--[if IE 9]>
+      <link rel="stylesheet" type="text/css" href="/assets/main-ie9.css" />
+    <![endif]-->
     <!-- compiled JavaScript -->
     <% scripts.forEach( function ( file ) { %>
     <script type="text/javascript" src="/<%= file %>"></script>

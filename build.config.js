@@ -2,9 +2,13 @@
 module.exports = {
   build_dir: 'build',
   compile_dir: 'bin',
+  compile_deploy_dir: '../morsel-press-widget-deploy-prod',
   server_config_dir: 'server_config',
   dev_server_port: '5003',
   view_dir: 'src/views',
+
+  prod_repo: 'git@heroku.com:morsel-press-widget.git',
+
   app_files: {
     js: [ 'src/**/*.js', '!src/**/*.spec.js', '!src/assets/**/*.js' ],
     jsunit: [ 'src/**/*.spec.js' ],
@@ -17,7 +21,7 @@ module.exports = {
   },
   parent_files: {
     js: [
-      'bower_components/iframe-resizer/js/iframeResizer.min.js',
+      'bower_components/iframe-resizer/src/iframeResizer.js',
       'bower_components/jschannel/src/jschannel.js',
       'src/assets/js/parent.js'
     ],
@@ -30,18 +34,14 @@ module.exports = {
   },
   vendor_files: {
     js: [
-      'bower_components/angular/angular.min.js',
-      'bower_components/angular/angular.min.js.map',
-      'bower_components/angular-bindonce/bindonce.min.js',
-      'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
-      'bower_components/angular-sanitize/angular-sanitize.min.js',
-      'bower_components/angular-sanitize/angular-sanitize.min.js.map',
-      'bower_components/angular-ui-router/release/angular-ui-router.min.js',
-      'bower_components/iframe-resizer/js/iframeResizer.contentWindow.min.js',
-      'bower_components/iframe-resizer/src/iframeResizer.contentWindow.map',
-      'bower_components/imagesloaded/imagesloaded.pkgd.min.js',
-      'bower_components/jquery/dist/jquery.min.js',
-      'bower_components/jquery/dist/jquery.min.map',
+      'bower_components/angular/angular.js',
+      'bower_components/angular-bindonce/bindonce.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'bower_components/angular-sanitize/angular-sanitize.js',
+      'bower_components/angular-ui-router/release/angular-ui-router.js',
+      'bower_components/iframe-resizer/src/iframeResizer.contentWindow.js',
+      'bower_components/imagesloaded/imagesloaded.pkgd.js',
+      'bower_components/jquery/dist/jquery.js',
       'bower_components/jschannel/src/jschannel.js',
       'bower_components/underscore/underscore.js'
     ],

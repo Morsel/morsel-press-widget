@@ -7,6 +7,7 @@ module.exports = function ( grunt ) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-bump');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ngmin');
@@ -99,6 +100,17 @@ module.exports = function ( grunt ) {
           }
         ]
       },
+      //copy our package.json for deployment
+      build_package_json: {
+        files: [
+          {
+            src: [ 'package.json' ],
+            dest: '<%= build_dir %>/',
+            cwd: '.',
+            expand: true
+          }
+        ]
+      },
       compile_assets: {
         files: [
           {
@@ -122,8 +134,29 @@ module.exports = function ( grunt ) {
       compile_server: {
         files: [
           {
-            src: [ '<%= server_config_dir %>/*' ],
+            src: [ '*' ],
             dest: '<%= compile_dir %>',
+            cwd: '<%= server_config_dir %>',
+            expand: true
+          }
+        ]
+      },
+      compile_deploy: {
+        files: [
+          {
+            src: [ '**' ],
+            dest: '<%= compile_deploy_dir %>',
+            cwd: '<%= compile_dir %>',
+            expand: true
+          }
+        ]
+      },
+      //copy our package.json for deployment
+      compile_package_json: {
+        files: [
+          {
+            src: [ 'package.json' ],
+            dest: '<%= compile_dir %>/',
             cwd: '.',
             expand: true
           }
@@ -183,10 +216,12 @@ module.exports = function ( grunt ) {
     uglify: {
       compile: {
         options: {
-          banner: '<%= meta.banner %>'
+          banner: '<%= meta.banner %>',
+          mangle: false
         },
         files: {
-          '<%= concat.compile_js.dest %>': '<%= concat.compile_js.dest %>'
+          '<%= concat.compile_js.dest %>': '<%= concat.compile_js.dest %>',
+          '<%= concat.compile_parent_js.dest %>': '<%= concat.compile_parent_js.dest %>'
         }
       }
     },
@@ -412,6 +447,28 @@ module.exports = function ( grunt ) {
           cwd: '<%= compile_dir %>'
         }
       }
+    },
+
+    shell: {
+      production_deploy_init: {
+        command: 'sh <%= server_config_dir %>/server_init.sh <%= compile_deploy_dir %> <%= prod_repo %> push_prod',
+        options: {
+          stdout: true
+        }
+      },
+      production_deploy_push: {
+        command: [
+          'git add .',
+          'git commit -a -m "automatically pushed to production"',
+          'git push push_prod master -f'
+        ].join('&&'),
+        options: {
+          stdout: true,
+          execOptions: {
+            cwd: '<%= compile_deploy_dir %>'
+          }
+        }
+      }
     }
   };
 
@@ -424,11 +481,11 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'default', [ 'build', 'compile' ] );
   
   grunt.registerTask( 'build', [
-    'clean', 'html2js', 'jshint', 'copy:build_app_assets', 'compass:build', 'concat:build_css', 'copy:build_vendor_assets', 'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_server', 'concat:build_parent_js', 'views:build', 'mrsl_parent:build', 'karmaconfig', 'karma:continuous'
+    'clean', 'html2js', 'jshint', 'copy:build_app_assets', 'compass:build', 'concat:build_css', 'copy:build_vendor_assets', 'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_server', 'concat:build_parent_js', 'views:build', 'mrsl_parent:build', 'karmaconfig', 'karma:continuous', 'copy:build_package_json'
   ]);
   
   grunt.registerTask( 'compile', [
-    'compass:compile', 'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify', 'copy:compile_server', 'views:compile'
+    'copy:compile_assets', 'compass:compile', 'ngmin', 'concat:compile_js', 'concat:compile_parent_js', 'uglify', 'copy:compile_server', 'copy:compile_package_json', 'views:compile', 'mrsl_parent:compile'
   ]);
 
   /**
@@ -440,6 +497,11 @@ module.exports = function ( grunt ) {
    * The `prod-server` task runs production-ready code on the local server
    */
   grunt.registerTask( 'prod-server', [ 'nodemon:prod']);
+
+  /**
+   * The `push-production` task pushes the site to heroku (morsel-press-widget.eatmorsel.com)
+   */
+  grunt.registerTask( 'push-production', [ 'shell:production_deploy_init', 'copy:compile_deploy', 'shell:production_deploy_push' ]);
   
   function filterForJS ( files ) {
     return files.filter( function ( file ) {

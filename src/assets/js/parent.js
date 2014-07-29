@@ -1,6 +1,6 @@
 ;(function(){
   'use strict';
-  var siteDomain = window.morselConfig ? window.morselConfig.siteDomain : 'http://morsel-media.herokuapp.com',
+  var siteDomain = window.morselConfig ? window.morselConfig.siteDomain : 'http://morsel-press-widget.herokuapp.com',
     mrslType,
     mrslId,
     chan;
