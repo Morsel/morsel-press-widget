@@ -30,7 +30,7 @@
       mrslType = typeMatches[1];
       mrslId = idMatches[1];
 
-      openChannel();
+      fireOpenModal();
     }
   }
 
