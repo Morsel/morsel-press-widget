@@ -64,8 +64,8 @@ app.get('/places/:id', function(req, res){
   });
 });
 
-app.get('/shell/:id', function(req, res){
-  res.render('shell', {
+app.get('/parent/:id', function(req, res){
+  res.render('parent', {
     placeId: req.params.id,
     nodeEnv: nodeEnv,
     apiUrl: apiUrl,

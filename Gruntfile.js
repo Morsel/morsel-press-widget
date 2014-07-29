@@ -139,11 +139,11 @@ module.exports = function ( grunt ) {
         ],
         dest: '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
       },
-      build_shell_js: {
+      build_parent_js: {
         src: [
-          '<%= shell_files.js %>'
+          '<%= parent_files.js %>'
         ],
-        dest: '<%= build_dir %>/assets/<%= pkg.name %>_shell-<%= pkg.version %>.js'
+        dest: '<%= build_dir %>/assets/<%= pkg.name %>_parent-<%= pkg.version %>.js'
       },
       compile_js: {
         options: {
@@ -159,11 +159,11 @@ module.exports = function ( grunt ) {
         ],
         dest: '<%= compile_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.js'
       },
-      compile_shell_js: {
+      compile_parent_js: {
         src: [
-          '<%= shell_files.js %>'
+          '<%= parent_files.js %>'
         ],
-        dest: '<%= compile_dir %>/assets/<%= pkg.name %>_shell-<%= pkg.version %>.js'
+        dest: '<%= compile_dir %>/assets/<%= pkg.name %>_parent-<%= pkg.version %>.js'
       }
     },
     
@@ -290,25 +290,25 @@ module.exports = function ( grunt ) {
           '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
         ]
       },
-      compile_shell: {
+      compile_parent: {
         dir: '<%= compile_dir %>',
         src: [
-          '<%= concat.compile_shell_js.dest %>'
+          '<%= concat.compile_parent_js.dest %>'
         ]
       }
     },
 
-    mrsl_shell: {
+    mrsl_parent: {
       build: {
         dir: '<%= build_dir %>',
         src: [
-          '<%= concat.build_shell_js.dest %>'
+          '<%= concat.build_parent_js.dest %>'
         ]
       },
       compile: {
         dir: '<%= compile_dir %>',
         src: [
-          '<%= concat.compile_shell_js.dest %>'
+          '<%= concat.compile_parent_js.dest %>'
         ]
       }
     },
@@ -424,7 +424,7 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'default', [ 'build', 'compile' ] );
   
   grunt.registerTask( 'build', [
-    'clean', 'html2js', 'jshint', 'copy:build_app_assets', 'compass:build', 'concat:build_css', 'copy:build_vendor_assets', 'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_server', 'concat:build_shell_js', 'views:build', 'mrsl_shell:build', 'karmaconfig', 'karma:continuous'
+    'clean', 'html2js', 'jshint', 'copy:build_app_assets', 'compass:build', 'concat:build_css', 'copy:build_vendor_assets', 'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_server', 'concat:build_parent_js', 'views:build', 'mrsl_parent:build', 'karmaconfig', 'karma:continuous'
   ]);
   
   grunt.registerTask( 'compile', [
@@ -487,7 +487,7 @@ module.exports = function ( grunt ) {
     });
   });
 
-  grunt.registerMultiTask( 'mrsl_shell', 'Process shell templates', function () {
+  grunt.registerMultiTask( 'mrsl_parent', 'Process parent templates', function () {
     var dirRE = new RegExp( '^('+grunt.config('build_dir')+'|'+grunt.config('compile_dir')+')\/', 'g' );
     var jsFiles = filterForJS( this.filesSrc ).map( function ( file ) {
       return file.replace( dirRE, '' );
@@ -496,7 +496,7 @@ module.exports = function ( grunt ) {
       return file.replace( dirRE, '' );
     });
 
-    grunt.file.copy(grunt.config('view_dir') + '/shell.hbs', this.data.dir + '/' + grunt.config('view_dir') + '/shell.hbs', { 
+    grunt.file.copy(grunt.config('view_dir') + '/parent.hbs', this.data.dir + '/' + grunt.config('view_dir') + '/parent.hbs', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {

@@ -12,14 +12,14 @@ module.exports = {
     atpl: [ 'src/app/**/*.tpl.html' ],
     ctpl: [ 'src/common/**/*.tpl.html' ],
 
-    hbs: [ 'src/views/frame.hbs', 'src/views/shell.hbs' ],
+    hbs: [ 'src/views/frame.hbs', 'src/views/parent.hbs' ],
     sass: 'src/sass/main.scss'
   },
-  shell_files: {
+  parent_files: {
     js: [
       'bower_components/iframe-resizer/js/iframeResizer.min.js',
       'bower_components/jschannel/src/jschannel.js',
-      'src/assets/js/shell.js'
+      'src/assets/js/parent.js'
     ],
     css: []
   },
