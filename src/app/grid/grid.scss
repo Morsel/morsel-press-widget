@@ -9,15 +9,15 @@
     .loader {
       display: block;
     }
+  }
 
-    &.loading-thumbs {
-      .grid-morsel-wrap {
-        background-color: transparent;
-      }
+  &.loading-thumbs {
+    .grid-morsel-wrap {
+      background-color: transparent;
+    }
 
-      .grid-morsel-bg {
-        display: none;
-      }
+    .grid-morsel-bg {
+      display: none;
     }
   }
 

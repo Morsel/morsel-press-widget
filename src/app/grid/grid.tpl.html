@@ -1,7 +1,7 @@
 <div id="mrsl-grid-container" class="mrsl-grid-container" ng-class="{'loading-thumbs':grid.loadingThumbs, 'loading-data':grid.loadingData}">
   <div ng-if="!grid.gridItems" class="loader"></div>
-  <div ng-if="grid.gridItems" ng-repeat="gridItem in grid.gridItems" class="grid-item">
-    <div ng-if="gridItem.type === 'morsel'" mrsl-grid-morsel="gridItem.subject"></div>
+  <div ng-if="grid.gridItems" bindonce ng-repeat="gridItem in grid.gridItems" class="grid-item">
+    <div bo-if="gridItem.type === 'morsel'" mrsl-grid-morsel="gridItem.subject"></div>
   </div>
 </div>
 <modalBackdrop></modalBackdrop>

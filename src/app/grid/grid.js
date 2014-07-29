@@ -1,6 +1,6 @@
 angular.module( 'Morsel.pressWidget.grid', [])
 
-.controller( 'GridCtrl', function GridCtrl( $scope, $timeout, $http, $modal ) {
+.controller( 'GridCtrl', function GridCtrl( $scope, $timeout, $http, $modal, frameCommunication ) {
   var ModalInstanceCtrl;
 
   //set some vars for our layout
@@ -11,8 +11,8 @@ angular.module( 'Morsel.pressWidget.grid', [])
   };
 
   //get some fake data for now
-  $http.get('../../assets/cache/morsel.json').success(function(resp){
-    var tempMorsels = resp.data,
+  $http.get('../../assets/cache/morsels.json').success(function(resp){
+    var tempMorsels = resp,
         morsels = [];
     for(var i = 0;i<tempMorsels.length;i++) {
       morsels.push({
@@ -22,13 +22,16 @@ angular.module( 'Morsel.pressWidget.grid', [])
     }
     $scope.grid.gridItems = morsels;
 
-    //$scope.grid.loadingThumbs = false;
+    $scope.grid.loadingThumbs = false;
     $scope.grid.loadingData = false;
   });
 
   //listen to any events from grid items
   $scope.$on('expand', function(e, data) {
-    //pop modal
+    openModal(data);
+  });
+
+  function openModal(data) {
     var modalInstance = $modal.open({
       templateUrl: 'modal/modalContent.tpl.html',
       controller: ModalInstanceCtrl,
@@ -39,11 +42,22 @@ angular.module( 'Morsel.pressWidget.grid', [])
         }
       }
     });
-  });
+  }
 
   ModalInstanceCtrl = function ($scope, $modalInstance, gridItemData) {
     $scope.id = gridItemData.id;
     $scope.type = gridItemData.type;
-    $scope.positionEl = gridItemData.positionEl;
+    //used to start the position of the modal
+    $scope.clickedItem = gridItemData.clickedItem;
   };
+
+  frameCommunication.setupOpenModal(function(params){
+    openModal({
+      id: params.id,
+      type: params.type
+    });
+
+    //return success for shell callback
+    return true;
+  });
 });

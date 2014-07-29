@@ -1,13 +1,20 @@
 angular.module( 'Morsel.pressWidget', [
   'templates-app',
   'templates-common',
+  'Morsel.presskit.frameCommunication',
   'Morsel.pressWidget.grid',
   'Morsel.pressWidget.modal',
+  'ngSanitize',
+  'pasvaz.bindonce',
   'ui.router',
 
-  //common
+  //app
   'Morsel.common.grid.morsel',
-  'Morsel.common.modal.morsel'
+  'Morsel.common.modal.morsel',
+  //common
+  'Morsel.common.morselUtils',
+  'Morsel.common.morselSharing',
+  'Morsel.common.userImage'
 ])
 
 .constant('EXPANDED_MODAL_HEIGHT', 390)

@@ -47,8 +47,80 @@ img {
   margin-left: 10px;
 }
 
-.morsel-full-container {
-  display: none;
+.profile-pic-link {
+  display: inline-block;
+  padding: $profile-bic-border-width;
+
+  img {
+    @include box-shadow(0 0 0 1px hsl(0, 0%, 90%), 0 0 0 2px hsl(0, 0%, 98%));
+  }
+}
+
+.profile-pic-xs {
+  width: $profile-pic-xs;
+  height: $profile-pic-xs;
+}
+
+.profile-pic-s {
+  width: $profile-pic-s;
+  height: $profile-pic-s;
+}
+
+.profile-pic-m {
+  width: $profile-pic-m;
+  height: $profile-pic-m;
+}
+
+.profile-pic-l {
+  width: $profile-pic-l;
+  height: $profile-pic-l;
+}
+
+.centered-title-img {
+  display: block;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  position: absolute;
+  @include filter(grayscale(30%));
+  @include opacity(.7);
+  @include transition(all .1s ease-out);
+}
+
+.centered-title-wrap {
+  z-index: 3;
+  display: table;
+  table-layout: fixed;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: $grid-item-height;
+  clear: both;
+}
+
+.centered-title {
+  padding: 0 15px;
+  text-align: center;
+  margin: 0;
+  white-space: normal;
+  color: white;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.centered-title-text {
+  @include text-shadow(rgba(0, 0, 0, 1) 0px 2px 6px);
+  text-transform: uppercase;
+  font-size: 24px;
+  @include transition(all .1s ease-out);
+  font-weight: 400;
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {

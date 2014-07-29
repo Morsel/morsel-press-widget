@@ -60,6 +60,13 @@ $link-color: $morsel-primary-light;
 $text-color: $morsel-dark;
 $link-hover-color: $morsel-primary;
 
+//users
+$profile-bic-border-width: 2px;
+$profile-pic-xs: 40px + $profile-bic-border-width*2;
+$profile-pic-s: 72px + $profile-bic-border-width*2;
+$profile-pic-m: 80px + $profile-bic-border-width*2;
+$profile-pic-l: 144px + $profile-bic-border-width*2;
+
 //hr
 $hr-height: 4px;
 
@@ -67,6 +74,19 @@ $hr-height: 4px;
 $grid-item-height: 300px;
 $expanded-modal-height: 390px;
 $modal-content-bg: #f3f1ef;
+
+//social
+//social
+$socialPalette: 
+  morsel $morsel-light,
+  facebook #2a5e9d,
+  twitter #00c2f6,
+  linkedin #0073a3,
+  pinterest #cd1e23,
+  stumbleupon #ff4d20,
+  google-plus #ee3e18,
+  expand #c5c5c5,
+  email $morsel-secondary;
 
 // Core Bootstrap variables and mixins
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss";

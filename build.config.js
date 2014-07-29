@@ -15,6 +15,14 @@ module.exports = {
     hbs: [ 'src/views/frame.hbs', 'src/views/shell.hbs' ],
     sass: 'src/sass/main.scss'
   },
+  shell_files: {
+    js: [
+      'bower_components/iframe-resizer/js/iframeResizer.min.js',
+      'bower_components/jschannel/src/jschannel.js',
+      'src/assets/js/shell.js'
+    ],
+    css: []
+  },
   test_files: {
     js: [
       'bower_components/angular-mocks/angular-mocks.js'
@@ -22,13 +30,19 @@ module.exports = {
   },
   vendor_files: {
     js: [
-      'bower_components/angular/angular.js',
+      'bower_components/angular/angular.min.js',
+      'bower_components/angular/angular.min.js.map',
+      'bower_components/angular-bindonce/bindonce.min.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
-      'bower_components/angular-ui-router/release/angular-ui-router.js',
-      'bower_components/angular-ui-utils/modules/route/route.js',
+      'bower_components/angular-sanitize/angular-sanitize.min.js',
+      'bower_components/angular-sanitize/angular-sanitize.min.js.map',
+      'bower_components/angular-ui-router/release/angular-ui-router.min.js',
       'bower_components/iframe-resizer/js/iframeResizer.contentWindow.min.js',
+      'bower_components/iframe-resizer/src/iframeResizer.contentWindow.map',
       'bower_components/imagesloaded/imagesloaded.pkgd.min.js',
       'bower_components/jquery/dist/jquery.min.js',
+      'bower_components/jquery/dist/jquery.min.map',
+      'bower_components/jschannel/src/jschannel.js',
       'bower_components/underscore/underscore.js'
     ],
     css: [

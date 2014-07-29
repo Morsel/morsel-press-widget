@@ -5,8 +5,8 @@ var _ = require('underscore');
 var app = express();
 var port = Number(process.env.PORT || 5000);
 var nodeEnv = process.env.NODE_ENV || 'local';
-var apiUrl = nodeEnv === 'local' ? 'http://api-staging.eatmorsel.com' : 'http://api.eatmorsel.com';
-var siteUrl = 'http://morsel-media.herokuapp.com';
+var apiUrl = nodeEnv === 'production' ? 'http://api.eatmorsel.com' : 'http://api-staging.eatmorsel.com';
+var siteDomain = nodeEnv === 'production' ? 'http://morsel-media.herokuapp.com' : 'http://localhost:' + port;
 
 app.use(logfmt.requestLogger());
 
@@ -42,10 +42,25 @@ app.get('/templates-app.js', function(req, res){
 });
 
 app.get('/places/:id', function(req, res){
-  res.render('place', {
-    placeId: req.params.id,
-    nodeEnv: nodeEnv,
-    apiUrl: apiUrl
+  var request = require('request');
+
+  request(apiUrl+'/places/'+req.params.id+'.json', function (error, response, body) {
+    var place = JSON.parse(body).data;
+
+    if (!error && response.statusCode == 200) {
+      if(place) {
+        res.render('place', {
+          placeId: req.params.id,
+          nodeEnv: nodeEnv,
+          apiUrl: apiUrl,
+          siteDomain: siteDomain
+        });
+      } else {
+        res.send('Something went wrong. Please contact support@eatmorsel.com');
+      }
+    } else {
+      res.send('Something went wrong. Please contact support@eatmorsel.com');
+    }
   });
 });
 
@@ -54,14 +69,26 @@ app.get('/shell/:id', function(req, res){
     placeId: req.params.id,
     nodeEnv: nodeEnv,
     apiUrl: apiUrl,
-    siteUrl: siteUrl
+    siteDomain: siteDomain
   });
 });
 
-app.get('*', function(req, res){
+app.get('/robots.txt', function(req, res){
+  res.sendfile('robots.txt');
+});
+
+app.get('/', function(req, res){
   res.redirect('http://www.eatmorsel.com');
+});
+
+app.get('*', function(req, res){
+  render404(res);
 });
 
 httpServer = app.listen(port, function() {
   console.log("Listening on " + port);
 });
+
+function render404(res) {
+  res.status(404).render('404');
+}

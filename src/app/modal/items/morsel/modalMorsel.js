@@ -1,6 +1,6 @@
 angular.module( 'Morsel.common.modal.morsel', [] )
 
-.directive('mrslModalMorsel', function($http, $q, $timeout, EXPANDED_MODAL_HEIGHT){
+.directive('mrslModalMorsel', function($http, $q, $timeout, EXPANDED_MODAL_HEIGHT, morselUtils, frameCommunication){
   return {
     restrict: 'A',
     scope: {
@@ -14,15 +14,27 @@ angular.module( 'Morsel.common.modal.morsel', [] )
           transformProperty,
           dataPromise = $q.defer(),
           halfSecondPromise = $q.defer(),
-          promises = [dataPromise.promise, halfSecondPromise.promise];
+          imageLoadPromise = $q.defer(),
+          promises = [dataPromise.promise, halfSecondPromise.promise, imageLoadPromise.promise];
       
       $q.all(promises).then(function(){
         scope.showMorsel = true;
       });
 
       $http.get('../../assets/cache/morsels/'+scope.id+'.json').success(function(resp){
-        scope.morsel = resp.data;
+        var firstImage;
+
+        scope.morsel = resp;
         dataPromise.resolve();
+
+        firstImage = angular.element('<img src="'+scope.getItemPhoto(scope.morsel.items[0])+'"/>');
+        imagesLoaded(firstImage, function() {
+          imageLoadPromise.resolve();
+          firstImage.remove();
+        });
+
+        //expose this for our share page
+        scope.coverPhotoStyle = {'background-image':'url('+morselUtils.getCoverPhoto(scope.morsel, '_480x480')+')'};
       });
 
       $timeout(function(){
@@ -61,6 +73,11 @@ angular.module( 'Morsel.common.modal.morsel', [] )
         element.children(1).css(transformProperty, 'translate(0, -' + ((itemNum - 1) * EXPANDED_MODAL_HEIGHT) + 'px)');
       };
 
+      scope.viewOnMorsel = function(e) {
+        e.preventDefault();
+        frameCommunication.goToUrl(scope.morsel.url);
+      };
+
       ['webkit', 'Moz', 'O', 'ms'].every(function (prefix) {
         var e = prefix + 'Transform';
         if (typeof document.body.style[e] !== 'undefined') {
@@ -70,6 +87,6 @@ angular.module( 'Morsel.common.modal.morsel', [] )
         return true;
       });
     },
-    templateUrl: 'modalItems/morsel/modalMorsel.tpl.html'
+    templateUrl: 'modal/items/morsel/modalMorsel.tpl.html'
   };
 });
