@@ -134,11 +134,15 @@
         width: 45%;
         float: left;
         height: 100%;
-        max-width: $expanded-modal-height;
+        
+        .item-img {
+          max-width: $expanded-modal-height;
+        }
       }
 
       .item-info {
         width: 55%;
+        height: 100%;
         float: left;
       }
     }
@@ -154,11 +158,7 @@
     }
 
     .item-description {
-      max-height: 210px;
-    }
-
-    .item-description.small-description {
-      max-height: 155px;
+      max-height: 180px;
     }
 
     .item-img {

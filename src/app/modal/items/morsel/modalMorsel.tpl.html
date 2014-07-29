@@ -25,7 +25,7 @@
         <div class="user">
           <span><img bo-src="getUserPhoto(morsel.creator)" class="img-circle" /></span> {{ morsel.creator.first_name + ' ' + morsel.creator.last_name }}
         </div>
-        <div class="item-description" bo-class="$last ? '' : 'small-description'">
+        <div class="item-description">
           <p bo-html="formatDescription(item.description)"></p>
         </div>
         <div class="item-control next-item" ng-click="next($index)">
