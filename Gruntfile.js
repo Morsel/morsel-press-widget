@@ -196,7 +196,7 @@ module.exports = function ( grunt ) {
         src: [
           '<%= parent_files.js %>'
         ],
-        dest: '<%= build_dir %>/assets/<%= pkg.name %>_parent-<%= pkg.version %>.js'
+        dest: '<%= build_dir %>/assets/<%= pkg.name %>_parent.js'
       },
       compile_js: {
         options: {
@@ -216,7 +216,7 @@ module.exports = function ( grunt ) {
         src: [
           '<%= parent_files.js %>'
         ],
-        dest: '<%= compile_dir %>/assets/<%= pkg.name %>_parent-<%= pkg.version %>.js'
+        dest: '<%= compile_dir %>/assets/<%= pkg.name %>_parent.js'
       }
     },
     

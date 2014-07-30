@@ -87,8 +87,10 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
     var compress = require('compression');
     app.use(compress());
 
+    var oneDay = 86400000;
+
     //static files
-    app.use('/assets', express.static(__dirname + '/assets'));
+    app.use('/assets', express.static(__dirname + '/assets', { maxAge: oneDay }));
     app.use('/src', express.static(__dirname + '/src'));
     app.use('/bower_components', express.static(__dirname + '/bower_components'));
 
