@@ -14,7 +14,10 @@
     "hbs": "~2.7.0",
     "compression": "~1.0.8",
     "logfmt": "~1.1.2",
-    "request": "~2.39.0"
+    "request": "~2.39.0",
+    "cluster": "~0.7.7",
+    "domain": "~0.2.8",
+    "rollbar": "~0.3.11"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
