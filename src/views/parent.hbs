@@ -17,7 +17,7 @@
         <script>var morselConfig={siteDomain:'{{{siteDomain}}}'};</script>
         {{/ifCond}}
         <% scripts.forEach( function ( file ) { %>
-        <script type="text/javascript" src="/<%= file %>"></script>
+        <script type="text/javascript" src="{{{siteDomain}}}/<%= file %>"></script>
         <% }); %>
       </div>
     </div>

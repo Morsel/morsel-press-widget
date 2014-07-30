@@ -1,6 +1,6 @@
 angular.module( 'Morsel.common.modal.morsel', [] )
 
-.directive('mrslModalMorsel', function($http, $q, $timeout, EXPANDED_MODAL_HEIGHT, morselUtils, frameCommunication){
+.directive('mrslModalMorsel', function($http, $q, $timeout, EXPANDED_MODAL_HEIGHT, morselUtils, frameCommunication, CACHE_URL){
   return {
     restrict: 'A',
     scope: {
@@ -21,10 +21,10 @@ angular.module( 'Morsel.common.modal.morsel', [] )
         scope.showMorsel = true;
       });
 
-      $http.get('../../assets/cache/morsels/'+scope.id+'.json').success(function(resp){
+      $http.get(CACHE_URL+'/items/morsels/'+scope.id+'.json').success(function(resp){
         var firstImage;
 
-        scope.morsel = resp;
+        scope.morsel = resp.data;
         dataPromise.resolve();
 
         firstImage = angular.element('<img src="'+scope.getItemPhoto(scope.morsel.items[0])+'"/>');
