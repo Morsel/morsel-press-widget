@@ -244,10 +244,15 @@
 
       .centered-title-wrap {
         height: $expanded-modal-height;
+        max-width: $expanded-modal-height;
       }
 
       .centered-title-text {
         font-size: 30px;
+      }
+
+      .centered-title-img {
+        max-width: $expanded-modal-height;
       }
 
       h5 {
