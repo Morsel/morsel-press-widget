@@ -52,10 +52,11 @@ module.exports = function ( grunt ) {
       }
     },    
 
-    clean: [ 
-      '<%= build_dir %>', 
-      '<%= compile_dir %>'
-    ],
+    clean: {
+      preDev: ['<%= build_dir %>'],
+      preCompile: ['<%= compile_dir %>'],
+      prePush: ['<%= compile_dir %>/config.js']
+    },
 
     copy: {
       build_app_assets: {
@@ -112,6 +113,15 @@ module.exports = function ( grunt ) {
           }
         ]
       },
+      //copy our config.js for development. will be removed before pushing to heroku
+      build_config: {
+        files: [{
+          src: ['config.js'],
+          dest: '<%= build_dir %>/',
+          cwd: '.',
+          expand: false
+        }]
+      },
       compile_assets: {
         files: [
           {
@@ -162,6 +172,15 @@ module.exports = function ( grunt ) {
             expand: true
           }
         ]
+      },
+      //copy our config.js for development. will be removed before pushing to heroku
+      compile_config: {
+        files: [{
+          src: ['config.js'],
+          dest: '<%= compile_dir %>/',
+          cwd: '.',
+          expand: false
+        }]
       }
     },
     
@@ -490,11 +509,11 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'default', [ 'build', 'compile' ] );
   
   grunt.registerTask( 'build', [
-    'clean', 'html2js', 'jshint', 'copy:build_app_assets', 'compass:build', 'concat:build_css', 'copy:build_vendor_assets', 'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_server', 'concat:build_parent_js', 'views:build', 'mrsl_parent:build', 'karmaconfig', 'karma:continuous', 'copy:build_package_json'
+    'clean:preDev', 'html2js', 'jshint', 'copy:build_app_assets', 'compass:build', 'concat:build_css', 'copy:build_vendor_assets', 'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_server', 'concat:build_parent_js', 'views:build', 'mrsl_parent:build', 'karmaconfig', 'karma:continuous', 'copy:build_package_json', 'copy:build_config'
   ]);
   
   grunt.registerTask( 'compile', [
-    'copy:compile_assets', 'compass:compile', 'ngmin', 'concat:compile_js', 'concat:compile_parent_js', 'uglify', 'copy:compile_server', 'copy:compile_package_json', 'views:compile', 'mrsl_parent:compile'
+    'clean:preCompile', 'copy:compile_assets', 'compass:compile', 'ngmin', 'concat:compile_js', 'concat:compile_parent_js', 'uglify', 'copy:compile_server', 'copy:compile_package_json', 'views:compile', 'mrsl_parent:compile', 'copy:compile_config'
   ]);
 
   /**
@@ -510,7 +529,7 @@ module.exports = function ( grunt ) {
   /**
    * The `push-production` task pushes the site to heroku (morsel-press-widget.eatmorsel.com)
    */
-  grunt.registerTask( 'push-production', [ 'shell:production_deploy_init', 'copy:compile_deploy', 'shell:production_deploy_push' ]);
+  grunt.registerTask( 'push-production', [ 'clean:prePush', 'shell:production_deploy_init', 'copy:compile_deploy', 'shell:production_deploy_push' ]);
 
   /**
    * The `cache` task caches all morsel data and pushes it to s3
