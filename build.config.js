@@ -4,6 +4,7 @@ module.exports = {
   compile_dir: 'bin',
   compile_deploy_dir: '../morsel-press-widget-deploy-prod',
   server_config_dir: 'server_config',
+  scripts_dir: 'scripts',
   dev_server_port: '5003',
   view_dir: 'src/views',
 

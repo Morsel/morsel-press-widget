@@ -14,6 +14,7 @@ module.exports = function ( grunt ) {
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-concurrent');
+  grunt.loadNpmTasks('grunt-execute');
 
   var userConfig = require( './build.config.js' );
 
@@ -451,7 +452,7 @@ module.exports = function ( grunt ) {
 
     shell: {
       production_deploy_init: {
-        command: 'sh <%= server_config_dir %>/server_init.sh <%= compile_deploy_dir %> <%= prod_repo %> push_prod',
+        command: 'sh <%= scripts_dir %>/server_init.sh <%= compile_deploy_dir %> <%= prod_repo %> push_prod',
         options: {
           stdout: true
         }
@@ -468,6 +469,14 @@ module.exports = function ( grunt ) {
             cwd: '<%= compile_deploy_dir %>'
           }
         }
+      }
+    },
+
+    execute: {
+      cache: {
+        src: [
+          '<%= scripts_dir %>/cache.js'
+        ]
       }
     }
   };
@@ -502,6 +511,11 @@ module.exports = function ( grunt ) {
    * The `push-production` task pushes the site to heroku (morsel-press-widget.eatmorsel.com)
    */
   grunt.registerTask( 'push-production', [ 'shell:production_deploy_init', 'copy:compile_deploy', 'shell:production_deploy_push' ]);
+
+  /**
+   * The `cache` task caches all morsel data and pushes it to s3
+   */
+  grunt.registerTask('cache', ['execute:cache']);
   
   function filterForJS ( files ) {
     return files.filter( function ( file ) {

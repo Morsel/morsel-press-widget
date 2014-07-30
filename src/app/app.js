@@ -18,6 +18,7 @@ angular.module( 'Morsel.pressWidget', [
 ])
 
 .constant('EXPANDED_MODAL_HEIGHT', 390)
+.constant('CACHE_URL', 'https://s3.amazonaws.com/morsel-press-kit/cache')
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
   $stateProvider.state( 'main', {
