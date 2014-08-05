@@ -123,11 +123,10 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
         var place = JSON.parse(body).data;
 
         if (!error && response.statusCode == 200) {
-          if(place && place.widget_url) {
+          if(place){// && place.widget_url) {
             res.render('place', {
               placeId: req.params.id,
               nodeEnv: nodeEnv,
-              apiUrl: apiUrl,
               widgetUrl: place.widget_url,
               placeName: place.name
             });
@@ -144,7 +143,6 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
       res.render('parent', {
         placeId: req.params.id,
         nodeEnv: nodeEnv,
-        apiUrl: apiUrl,
         morselDomain: morselDomain
       });
     });
