@@ -3,7 +3,7 @@ angular.module('Morsel.presskit.frameCommunication', [])
 .factory('frameCommunication', function($window) {
   var chan = Channel.build({
         window: $window.parent,
-        origin: $window.morselConfig.siteDomain,
+        origin: $window.morselConfig.widgetUrl,
         scope: "mrsl.pressKit"
       });
 

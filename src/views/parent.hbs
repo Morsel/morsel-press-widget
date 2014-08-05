@@ -12,12 +12,12 @@
     </header>
     <div style="max-width:1200;margin:0 auto;">
       <div style="padding:0;max-width:960px;margin:0 auto;border:0;height:100%">
-        <iframe id="morsel-iframe" border="0" frameborder="0" SCROLLING="no" style="border:0 none" src="{{{siteDomain}}}/places/{{{placeId}}}" width="100%"></iframe>
+        <iframe id="morsel-iframe" border="0" frameborder="0" SCROLLING="no" style="border:0 none" src="{{{morselDomain}}}/places/{{{placeId}}}" width="100%"></iframe>
         {{#ifCond nodeEnv 'local'}}
-        <script>var morselConfig={siteDomain:'{{{siteDomain}}}'};</script>
+        <script>var morselConfig={morselDomain:'{{{morselDomain}}}'};</script>
         {{/ifCond}}
         <% scripts.forEach( function ( file ) { %>
-        <script type="text/javascript" src="{{{siteDomain}}}/<%= file %>"></script>
+        <script type="text/javascript" src="{{{morselDomain}}}/<%= file %>"></script>
         <% }); %>
       </div>
     </div>
