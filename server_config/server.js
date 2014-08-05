@@ -128,7 +128,8 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
               placeId: req.params.id,
               nodeEnv: nodeEnv,
               apiUrl: apiUrl,
-              widgetUrl: place.widget_url
+              widgetUrl: place.widget_url,
+              placeName: place.name
             });
           } else {
             res.send('Something went wrong. Please contact support@eatmorsel.com');
