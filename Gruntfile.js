@@ -234,20 +234,13 @@ module.exports = function ( grunt ) {
     },
     
     uglify: {
-      compile_js: {
+      compile: {
         options: {
-          banner: '<%= meta.banner %>'/*,
-          mangle: false*/
+          banner: '<%= meta.banner %>',
+          mangle: false
         },
         files: {
-          '<%= concat.compile_js.dest %>': '<%= concat.compile_js.dest %>'
-        }
-      },
-      compile_parent_js: {
-        options: {
-          banner: '<%= meta.banner %>'
-        },
-        files: {
+          '<%= concat.compile_js.dest %>': '<%= concat.compile_js.dest %>',
           '<%= concat.compile_parent_js.dest %>': '<%= concat.compile_parent_js.dest %>'
         }
       }
@@ -520,7 +513,7 @@ module.exports = function ( grunt ) {
   ]);
   
   grunt.registerTask( 'compile', [
-    'clean:preCompile', 'copy:compile_assets', 'compass:compile', 'ngmin', 'concat:compile_js', 'concat:compile_parent_js', 'uglify:compile_js', 'uglify:compile_parent_js', 'copy:compile_server', 'copy:compile_package_json', 'views:compile', 'mrsl_parent:compile', 'copy:compile_config'
+    'clean:preCompile', 'copy:compile_assets', 'compass:compile', 'ngmin', 'concat:compile_js', 'concat:compile_parent_js', 'uglify', 'copy:compile_server', 'copy:compile_package_json', 'views:compile', 'mrsl_parent:compile', 'copy:compile_config'
   ]);
 
   /**

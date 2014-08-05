@@ -51,8 +51,8 @@ angular.module( 'Morsel.common.morselSharing', [] )
         if(socialType === 'facebook') {
           url = 'https://www.facebook.com/sharer/sharer.php?u='+facebookUrl;
         } else if(socialType === 'twitter') {
-          shareText = encodeURIComponent('"'+s.title+'" from '+twitterUsername+' on @eatmorsel ');
-          url = 'https://twitter.com/home?status='+twitterUrl;
+          shareText = encodeURIComponent('"'+s.title+'" from '+twitterUsername+' on @eatmorsel '+twitterUrl);
+          url = 'https://twitter.com/home?status='+shareText;
         } else if(socialType === 'linkedin') {
           url = 'https://www.linkedin.com/shareArticle?mini=true&url='+linkedinUrl;
         } else if(socialType === 'pinterest') {
