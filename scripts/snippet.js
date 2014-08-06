@@ -10,7 +10,7 @@ if(typeof process.argv[2] != 'undefined') {
 }
 
 var templateData = {
-  "morselDomain": "http://morsel-press-widget.herokuapp.com",
+  "morselDomain": "http://widget.eatmorsel.com",
   "nodeEnv":"production",
   "placeId":placeId
 };

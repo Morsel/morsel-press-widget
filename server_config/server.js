@@ -79,7 +79,7 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
     var app = express();
     var port = Number(process.env.PORT || 5000);
     var apiUrl = 'http://api.eatmorsel.com';//always use prod for this, shouldn't need staging
-    var morselDomain = nodeEnv === 'production' ? 'http://morsel-press-widget.herokuapp.com' : 'http://localhost:' + port;
+    var morselDomain = nodeEnv === 'production' ? 'http://widget.eatmorsel.com' : 'http://localhost:' + port;
 
     app.use(logfmt.requestLogger());
 
