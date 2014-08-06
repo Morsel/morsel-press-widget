@@ -96,6 +96,7 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
 
     //use hbs for templates
     var hbs = require('hbs');
+    hbs.registerPartials(__dirname + '/src/views/partials');
     app.set('view engine', 'hbs');
     app.set('views', __dirname + '/src/views');
 
