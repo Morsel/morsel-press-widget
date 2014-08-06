@@ -10,7 +10,6 @@ angular.module( 'Morsel.pressWidget.grid', [])
     loadingData: true
   };
 
-  //get some fake data for now
   $http.get(CACHE_URL+'/grid/'+morselConfig.placeId+'.json').success(function(resp){
     var tempItems = resp.data,
         items = [];

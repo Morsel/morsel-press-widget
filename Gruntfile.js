@@ -496,6 +496,14 @@ module.exports = function ( grunt ) {
         src: [
           '<%= scripts_dir %>/cache.js'
         ]
+      },
+      snippet: {
+        options: {
+          args: [grunt.option('placeId')]
+        },
+        src: [
+          '<%= scripts_dir %>/snippet.js'
+        ]
       }
     }
   };
@@ -535,6 +543,11 @@ module.exports = function ( grunt ) {
    * The `cache` task caches all morsel data and pushes it to s3
    */
   grunt.registerTask('cache', ['execute:cache']);
+
+  /**
+   * The `snippet` task generates a snippet to give to a restaurant
+   */
+  grunt.registerTask('snippet', ['compile','execute:snippet']);
   
   function filterForJS ( files ) {
     return files.filter( function ( file ) {
@@ -592,6 +605,18 @@ module.exports = function ( grunt ) {
     });
 
     grunt.file.copy(grunt.config('view_dir') + '/parent.hbs', this.data.dir + '/' + grunt.config('view_dir') + '/parent.hbs', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            scripts: jsFiles,
+            styles: cssFiles,
+            version: grunt.config( 'pkg.version' )
+          }
+        });
+      }
+    });
+
+    grunt.file.copy(grunt.config('view_dir') + '/partials/snippet.hbs', this.data.dir + '/' + grunt.config('view_dir') + '/partials/snippet.hbs', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {

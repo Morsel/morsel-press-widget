@@ -11,15 +11,7 @@
       <h1>This is a fake website shell that shows what it would look like if the morsel press widget was on a site</h1>
     </header>
     <div style="max-width:1200;margin:0 auto;">
-      <div style="padding:0;max-width:960px;margin:0 auto;border:0;height:100%">
-        <iframe id="morsel-iframe" border="0" frameborder="0" SCROLLING="no" style="border:0 none" src="{{{siteDomain}}}/places/{{{placeId}}}" width="100%"></iframe>
-        {{#ifCond nodeEnv 'local'}}
-        <script>var morselConfig={siteDomain:'{{{siteDomain}}}'};</script>
-        {{/ifCond}}
-        <% scripts.forEach( function ( file ) { %>
-        <script type="text/javascript" src="{{{siteDomain}}}/<%= file %>"></script>
-        <% }); %>
-      </div>
+      {{> snippet}}
     </div>
     <footer>
       <h2>I'm a footer!</h2>

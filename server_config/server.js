@@ -79,7 +79,7 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
     var app = express();
     var port = Number(process.env.PORT || 5000);
     var apiUrl = 'http://api.eatmorsel.com';//always use prod for this, shouldn't need staging
-    var siteDomain = nodeEnv === 'production' ? 'http://morsel-press-widget.herokuapp.com' : 'http://localhost:' + port;
+    var morselDomain = nodeEnv === 'production' ? 'http://widget.eatmorsel.com' : 'http://localhost:' + port;
 
     app.use(logfmt.requestLogger());
 
@@ -96,6 +96,7 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
 
     //use hbs for templates
     var hbs = require('hbs');
+    hbs.registerPartials(__dirname + '/src/views/partials');
     app.set('view engine', 'hbs');
     app.set('views', __dirname + '/src/views');
 
@@ -123,12 +124,12 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
         var place = JSON.parse(body).data;
 
         if (!error && response.statusCode == 200) {
-          if(place) {
+          if(place){// && place.widget_url) {
             res.render('place', {
               placeId: req.params.id,
               nodeEnv: nodeEnv,
-              apiUrl: apiUrl,
-              siteDomain: siteDomain
+              widgetUrl: place.widget_url,
+              placeName: place.name
             });
           } else {
             res.send('Something went wrong. Please contact support@eatmorsel.com');
@@ -143,8 +144,7 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
       res.render('parent', {
         placeId: req.params.id,
         nodeEnv: nodeEnv,
-        apiUrl: apiUrl,
-        siteDomain: siteDomain
+        morselDomain: morselDomain
       });
     });
 
