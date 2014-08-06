@@ -14,20 +14,18 @@ angular.module( 'Morsel.common.morselSharing', [] )
         var primaryItem,
             m = scope.morsel;
 
-        //if they have a collage, use it
-        if(m.photos) {
-          return m.photos._800x600;
-        } else {
-          //use their cover photo as backup
-          primaryItem = _.find(m.items, function(i) {
-            return i.id === m.primary_item_id;
-          });
+        primaryItem = _.find(m.items, function(i) {
+          return i.id === m.primary_item_id;
+        });
 
-          if(primaryItem && primaryItem.photos) {
-            return primaryItem.photos._992x992;
-          } else {
-            return m[0].photos._992x992;
-          }
+        //use their cover photo if there is one
+        if(primaryItem && primaryItem.photos) {
+          return primaryItem.photos._992x992;
+        } else {
+          //if not, use first item with a photo
+          return _.find(m.items, function(i) {
+            return i.photos;
+          }).photos._992x992;
         }
       }
 
