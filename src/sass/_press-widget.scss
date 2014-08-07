@@ -116,6 +116,6 @@ img {
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
   .powered-by-morsel a {
-    @include background-image($powered-by-morsel-2x);
+    @include background-image(url($powered-by-morsel-2x));
   }
 }

@@ -55,7 +55,12 @@ module.exports = function ( grunt ) {
     clean: {
       preDev: ['<%= build_dir %>'],
       preCompile: ['<%= compile_dir %>'],
-      prePush: ['<%= compile_dir %>/config.js']
+      prePush: ['<%= compile_dir %>/config.js'],
+      postCompile: [
+        '<%= compile_dir %>/assets/js',
+        '<%= compile_dir %>/assets/images/spritesheets/common',
+        '<%= compile_dir %>/assets/main.css'
+      ]
     },
 
     copy: {
@@ -125,7 +130,7 @@ module.exports = function ( grunt ) {
       compile_assets: {
         files: [
           {
-            src: [ '**' ],
+            src: [ '**', '!*.css' ],
             dest: '<%= compile_dir %>/assets',
             cwd: '<%= build_dir %>/assets',
             expand: true
@@ -197,6 +202,13 @@ module.exports = function ( grunt ) {
           '<%= parent_files.js %>'
         ],
         dest: '<%= build_dir %>/assets/<%= pkg.name %>_parent.js'
+      },
+      compile_css: {
+        src: [
+          '<%= vendor_files.css %>',
+          '<%= compile_dir %>/assets/main.css'
+        ],
+        dest: '<%= compile_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
       },
       compile_js: {
         options: {
@@ -521,7 +533,7 @@ module.exports = function ( grunt ) {
   ]);
   
   grunt.registerTask( 'compile', [
-    'clean:preCompile', 'copy:compile_assets', 'compass:compile', 'ngmin', 'concat:compile_js', 'concat:compile_parent_js', 'uglify', 'copy:compile_server', 'copy:compile_package_json', 'views:compile', 'mrsl_parent:compile', 'copy:compile_config'
+    'clean:preCompile', 'copy:compile_assets', 'compass:compile', 'ngmin', 'concat:compile_css', 'concat:compile_js', 'concat:compile_parent_js', 'uglify', 'copy:compile_server', 'copy:compile_package_json', 'views:compile', 'mrsl_parent:compile', 'copy:compile_config', 'clean:postCompile'
   ]);
 
   /**
