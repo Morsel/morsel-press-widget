@@ -1,3 +1,7 @@
+body {
+  background: transparent;
+}
+
 h1, h2, h3, h4, h5, a, .user {
   font-family: 'Roboto Slab', 'Helvetica Neue Light', 'Helvetica Neue', Arial, sans-serif;
 }
@@ -25,26 +29,13 @@ img {
   position: relative;
 }
 
-.powered-by-morsel {
-  text-align: center;
-  color: #93a491;
-}
-
-.powered-by-morsel p {
-  line-height: 59px;
-  display: inline-block;
-}
-
 .powered-by-morsel a {
-  background: url(/assets/images/logos/morsel-text.png) center top no-repeat;
-  background-size: 130px 59px;
-  width: 130px;
-  height: 59px;
-  display: inline-block;
+  @include replace-text-with-dimensions($powered-by-morsel);
+  background-size: $powered-by-morsel-width $powered-by-morsel-height;
+  display: block;
   text-indent: -9999px;
   overflow: hidden;
-  vertical-align: text-bottom;
-  margin-left: 10px;
+  margin: 0 auto;
 }
 
 .profile-pic-link {
@@ -124,7 +115,7 @@ img {
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
-  .morsel-text {
-    background-image: url(/assets/images/logos/morsel-text@2x.png);
+  .powered-by-morsel a {
+    @include background-image($powered-by-morsel-2x);
   }
 }
