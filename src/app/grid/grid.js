@@ -1,29 +1,21 @@
 angular.module( 'Morsel.pressWidget.grid', [])
 
-.controller( 'GridCtrl', function GridCtrl( $scope, $timeout, $http, $modal, frameCommunication, CACHE_URL ) {
+.controller( 'GridCtrl', function GridCtrl( $scope, $timeout, $modal, $http, frameCommunication, CACHE_URL ) {
   var ModalInstanceCtrl;
 
-  //set some vars for our layout
-  $scope.grid = {
-    gridItems: null,
-    loadingThumbs: true,
-    loadingData: true
-  };
-
   $http.get(CACHE_URL+'/grid/'+morselConfig.placeId+'.json').success(function(resp){
-    var tempItems = resp.data,
-        items = [];
-
-    for(var i = 0;i<tempItems.length;i++) {
-      items.push({
+    var gridItems = [];
+    
+    _.each(resp.data, function(m) {
+      gridItems.push({
         type: 'morsel',
-        subject: tempItems[i]
+        subject: m
       });
-    }
-    $scope.grid.gridItems = items;
+    });
 
-    $scope.grid.loadingThumbs = false;
-    $scope.grid.loadingData = false;
+    //got all the data now
+    $scope.gridItems = gridItems;
+    $scope.layout.loadingData = false;
   });
 
   //listen to any events from grid items

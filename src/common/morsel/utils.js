@@ -1,8 +1,7 @@
 angular.module('Morsel.common.morselUtils', [])
 
-.factory('morselUtils', function(){
-  var Utils,
-      morselPlaceholderUrl = '/assets/images/util/morsel-placeholder_480x480.jpg';
+.factory('morselUtils', function(MORSEL_PLACEHOLDER){
+  var Utils;
 
   Utils = {
     getCoverPhoto: function(morsel, size) {
@@ -11,10 +10,10 @@ angular.module('Morsel.common.morselUtils', [])
       primaryItemPhotos = Utils.findPrimaryItemPhotos(morsel);
 
       if(size) {
-        return primaryItemPhotos && primaryItemPhotos[size] ? primaryItemPhotos[size] : morselPlaceholderUrl;
+        return primaryItemPhotos && primaryItemPhotos[size] ? primaryItemPhotos[size] : MORSEL_PLACEHOLDER;
       } else {
         //default size
-        return primaryItemPhotos ? primaryItemPhotos._50x50 : morselPlaceholderUrl;
+        return primaryItemPhotos ? primaryItemPhotos._50x50 : MORSEL_PLACEHOLDER;
       }
     },
 

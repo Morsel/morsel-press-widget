@@ -1,6 +1,6 @@
 angular.module( 'Morsel.common.grid.morsel', [] )
 
-.directive('mrslGridMorsel', function($timeout, morselUtils){
+.directive('mrslGridMorsel', function($timeout, morselUtils, MORSEL_PLACEHOLDER){
   return {
     restrict: 'A',
     scope: {
@@ -8,21 +8,22 @@ angular.module( 'Morsel.common.grid.morsel', [] )
     },
     replace: true,
     link: function(scope, element, attrs) {
-      var coverPhotoBig = morselUtils.getCoverPhoto(scope.morsel, '_50x50'),
+      var coverPhoto = morselUtils.getCoverPhoto(scope.morsel, '_320x320'),
           imagePreload;
 
       scope.clickedItem = element.parent();
       
-      scope.coverPhotoStyle = {'background-image':'url('+morselUtils.getCoverPhoto(scope.morsel, '_320x320')+')'};
+      scope.coverPhotoStyle = {'background-image':'url('+MORSEL_PLACEHOLDER+')'};
 
-      /*_.defer(function() {
-        imagePreload = angular.element('<div><img src="'+coverPhotoBig+'" /></div>');
+      _.defer(function() {
+        imagePreload = angular.element('<img src="'+coverPhoto+'" />');
         imagesLoaded(imagePreload, _.defer(function(){
-          scope.coverPhotoStyle = {'background-image':'url('+coverPhotoBig+')'};
+          scope.coverPhotoStyle = {'background-image':'url('+coverPhoto+')'};
+          scope.imgLoaded = true;
           scope.$apply();
           imagePreload.remove();
         }));
-      });*/
+      });
 
       scope.expandMorsel = function(e) {
         scope.$emit('expand', {

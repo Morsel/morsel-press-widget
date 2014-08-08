@@ -70,11 +70,6 @@ $profile-pic-l: 144px + $profile-bic-border-width*2;
 //hr
 $hr-height: 4px;
 
-//press kit specific
-$grid-item-height: 300px;
-$expanded-modal-height: 390px;
-$modal-content-bg: #f3f1ef;
-
 //social
 //social
 $socialPalette: 
@@ -86,10 +81,19 @@ $socialPalette:
   googleplus #ee3e18,
   clipboard $morsel-secondary;
 
+//press kit specific
+$grid-item-height: 300px;
+$expanded-modal-height: 390px;
+$modal-content-bg: #f3f1ef;
+
 $powered-by-morsel: 'logos/powered-by-morsel.png';
 $powered-by-morsel-2x: 'images/logos/powered-by-morsel@2x.png';
 $powered-by-morsel-width: image-width($powered-by-morsel);
 $powered-by-morsel-height: image-height($powered-by-morsel);
+
+$gridTransitionTime: .07s;
+$modalTransitionTime: .2s;
+$morselPlaceholder: '/assets/images/util/morsel-placeholder_480x480.jpg';
 
 // Core Bootstrap variables and mixins
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss";

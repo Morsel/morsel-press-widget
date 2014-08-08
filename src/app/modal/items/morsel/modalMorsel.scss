@@ -59,6 +59,10 @@
     height: 100%;
   }
 
+  .item-img {
+    background-image: url($morselPlaceholder);
+  }
+
   .morsel-full .morsel-title {
     padding: 45px 20px 15px;
     font-size: 22px;
@@ -121,8 +125,7 @@
 
     .morsel-full {
       height: $expanded-modal-height;
-      -webkit-transition: all 0.4s ease-in-out;
-      transition: all 0.4s ease-in-out;
+      @include transition(all $modalTransitionTime ease-in-out);
     }
 
     .morsel-mobile-info {

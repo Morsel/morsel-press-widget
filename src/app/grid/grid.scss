@@ -1,8 +1,5 @@
-.mrsl-grid-container {
-  overflow: hidden;
-  margin-bottom: 10px;
-
-  &.loading-data {
+.loading-data {
+  .mrsl-grid-container {
     height: $grid-item-height;
     background-size: cover;
 
@@ -10,16 +7,10 @@
       display: block;
     }
   }
-
-  &.loading-thumbs {
-    .grid-morsel-wrap {
-      background-color: transparent;
-    }
-
-    .grid-morsel-bg {
-      display: none;
-    }
-  }
+}
+.mrsl-grid-container {
+  overflow: hidden;
+  margin-bottom: 10px;
 
   .loader {
     display: none;
@@ -33,6 +24,7 @@
   position: relative;
   overflow: hidden;
   padding: 1px;
+  background-image: url($morselPlaceholder);
 }
 
 @media (min-width: $screen-xs) {
