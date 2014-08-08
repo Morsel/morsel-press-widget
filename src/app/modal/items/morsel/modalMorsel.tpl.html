@@ -11,7 +11,7 @@
     <div bindonce ng-repeat="item in morsel.items" class="slide-item morsel-item">
       <hr />
       <div class="item-img-wrap">
-        <div class="item-img">
+        <div class="item-img" ng-class="{'image-loaded':firstImageLoaded}">
           <div>
             <img bo-src="getItemPhoto(item)" />
           </div>

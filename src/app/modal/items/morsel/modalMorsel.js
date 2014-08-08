@@ -26,6 +26,13 @@ angular.module( 'Morsel.common.modal.morsel', [] )
         scope.morsel = resp.data;
         dataPromise.resolve();
 
+        var firstImage = angular.element('<img src="'+scope.getItemPhoto(scope.morsel.items[0])+'"/>');
+        imagesLoaded(firstImage, function() {
+          scope.firstImageLoaded = true;
+          scope.$apply();
+          firstImage.remove();
+        });
+
         //expose this for our share page
         scope.coverPhotoStyle = {'background-image':'url('+morselUtils.getCoverPhoto(scope.morsel, '_480x480')+')'};
       });
