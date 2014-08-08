@@ -75,7 +75,7 @@ angular.module('Morsel.pressWidget.modal', [])
   };
 }])
 
-.directive('modalWindow', ['$modalStack', '$timeout', 'EXPANDED_MODAL_HEIGHT', function ($modalStack, $timeout, EXPANDED_MODAL_HEIGHT) {
+.directive('modalWindow', ['$modalStack', '$timeout', 'EXPANDED_MODAL_HEIGHT', '$document', function ($modalStack, $timeout, EXPANDED_MODAL_HEIGHT, $document) {
   return {
     restrict: 'EA',
     scope: {
@@ -87,10 +87,10 @@ angular.module('Morsel.pressWidget.modal', [])
       return tAttrs.templateUrl || 'modal/modalWindow.tpl.html';
     },
     link: function (scope, element, attrs) {
-      var $clickedItem,
-          $grid = $('#mrsl-grid-container'),
-          gridHeight = $grid.height(),
-          modalPosition = {};
+      var grid = $document[0].getElementById('mrsl-grid-container'),
+          gridHeight = grid.clientHeight,
+          modalPosition = {},
+          clickedItem;
 
       scope.animate = false;
 
@@ -98,12 +98,16 @@ angular.module('Morsel.pressWidget.modal', [])
 
       //was there a clicked item or did this come from an event
       if(scope.$parent.clickedItem) {
-        $clickedItem = $(scope.$parent.clickedItem);
+        //grab the element
+        clickedItem = scope.$parent.clickedItem[0];
+
         //this gets left and top
-        modalPosition = $clickedItem.position();
-        //get w and h
-        modalPosition.width = $clickedItem.width();
-        modalPosition.height = $clickedItem.height();
+        modalPosition = {
+          top: clickedItem.offsetTop,
+          left: clickedItem.offsetLeft,
+          width: clickedItem.clientWidth,
+          height: clickedItem.clientHeight
+        };
 
         //if it's too close to the bottom to fit
         if(modalPosition.top >= gridHeight - EXPANDED_MODAL_HEIGHT) {
@@ -116,7 +120,7 @@ angular.module('Morsel.pressWidget.modal', [])
           top: modalPosition.top + 'px',
           left: modalPosition.left + 'px',
           width: modalPosition.width + 'px',
-          height: modalPosition.height + 'px'
+          height: EXPANDED_MODAL_HEIGHT + 'px'//modalPosition.height + 'px'
         };
 
         $timeout(function () {

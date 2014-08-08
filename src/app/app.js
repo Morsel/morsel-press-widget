@@ -19,6 +19,8 @@ angular.module( 'Morsel.pressWidget', [
 
 .constant('EXPANDED_MODAL_HEIGHT', 390)
 .constant('CACHE_URL', 'https://s3.amazonaws.com/morsel-press-kit/cache')
+.constant('MORSEL_PLACEHOLDER', '/assets/images/util/morsel-placeholder_480x480.jpg')
+.constant('USER_PLACEHOLDER', '/assets/images/util/avatars/avatar_40x40.jpg')
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
   $stateProvider.state( 'main', {
@@ -35,7 +37,7 @@ angular.module( 'Morsel.pressWidget', [
 .run( function run () {
 })
 
-.controller( 'PressWidgetCtrl', function PressWidgetCtrl ( $scope, $location, $state ) {
+.controller( 'PressWidgetCtrl', function PressWidgetCtrl ( $scope, $location, $state, MORSEL_PLACEHOLDER ) {
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
     if ( angular.isDefined( toState.data.pageTitle ) ) {
       $scope.pageTitle = toState.data.pageTitle + ' | Morsel' ;
@@ -43,5 +45,15 @@ angular.module( 'Morsel.pressWidget', [
   });
 
   $state.go('main');
+
+  $scope.layout = {
+    loadingData : true
+  };
+
+  //immediately fetch placeholder image so it's cached
+  var placeholderPreload = angular.element('<img src="'+MORSEL_PLACEHOLDER+'" />');
+  imagesLoaded(placeholderPreload, _.defer(function(){
+    placeholderPreload.remove();
+  }));
 });
 

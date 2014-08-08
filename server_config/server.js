@@ -118,15 +118,16 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
     });
 
     app.get('/places/:id', function(req, res){
-      var request = require('request');
+      var request = require('request'),
+          placeId = req.params.id;
 
-      request(apiUrl+'/places/'+req.params.id+'.json', function (error, response, body) {
+      request(apiUrl+'/places/'+placeId+'.json', function (error, response, body) {
         var place = JSON.parse(body).data;
 
         if (!error && response.statusCode == 200) {
-          if(place){// && place.widget_url) {
+          if(place && place.widget_url){
             res.render('place', {
-              placeId: req.params.id,
+              placeId: placeId,
               nodeEnv: nodeEnv,
               widgetUrl: place.widget_url,
               placeName: place.name

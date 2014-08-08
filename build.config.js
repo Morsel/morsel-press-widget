@@ -37,22 +37,16 @@ module.exports = {
     js: [
       'bower_components/angular/angular.js',
       'bower_components/angular-bindonce/bindonce.js',
-      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/iframe-resizer/src/iframeResizer.contentWindow.js',
       'bower_components/imagesloaded/imagesloaded.pkgd.js',
-      'bower_components/jquery/dist/jquery.js',
       'bower_components/jschannel/src/jschannel.js',
       'bower_components/underscore/underscore.js'
     ],
     css: [
     ],
     assets: [
-      'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot',
-      'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.svg',
-      'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf',
-      'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.woff'
     ]
   },
 };

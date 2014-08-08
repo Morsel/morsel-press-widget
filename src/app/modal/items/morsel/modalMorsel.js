@@ -1,6 +1,6 @@
 angular.module( 'Morsel.common.modal.morsel', [] )
 
-.directive('mrslModalMorsel', function($http, $q, $timeout, EXPANDED_MODAL_HEIGHT, morselUtils, frameCommunication, CACHE_URL){
+.directive('mrslModalMorsel', function($http, $q, $timeout, EXPANDED_MODAL_HEIGHT, morselUtils, frameCommunication, CACHE_URL, MORSEL_PLACEHOLDER, USER_PLACEHOLDER){
   return {
     restrict: 'A',
     scope: {
@@ -10,36 +10,29 @@ angular.module( 'Morsel.common.modal.morsel', [] )
     replace: true,
     link: function(scope, element, attrs) {
       var tempMorsel,
-          morselPlaceholderUrl = '/assets/images/util/morsel-placeholder_480x480.jpg',
           transformProperty,
+          cssDelay = 200,
           dataPromise = $q.defer(),
-          halfSecondPromise = $q.defer(),
-          imageLoadPromise = $q.defer(),
-          promises = [dataPromise.promise, halfSecondPromise.promise, imageLoadPromise.promise];
+          cssDelayPromise = $q.defer(),
+          promises = [dataPromise.promise, cssDelayPromise.promise];
       
+      scope.showMorsel = false;
+
       $q.all(promises).then(function(){
         scope.showMorsel = true;
       });
 
       $http.get(CACHE_URL+'/items/morsels/'+scope.id+'.json').success(function(resp){
-        var firstImage;
-
         scope.morsel = resp.data;
         dataPromise.resolve();
-
-        firstImage = angular.element('<img src="'+scope.getItemPhoto(scope.morsel.items[0])+'"/>');
-        imagesLoaded(firstImage, function() {
-          imageLoadPromise.resolve();
-          firstImage.remove();
-        });
 
         //expose this for our share page
         scope.coverPhotoStyle = {'background-image':'url('+morselUtils.getCoverPhoto(scope.morsel, '_480x480')+')'};
       });
 
       $timeout(function(){
-        halfSecondPromise.resolve();
-      }, 500);
+        cssDelayPromise.resolve();
+      }, cssDelay);
 
       scope.formatDescription = function(description) {
         if(description) {
@@ -53,7 +46,7 @@ angular.module( 'Morsel.common.modal.morsel', [] )
         if(item.photos) {
           return item.photos._480x480;
         } else {
-          return morselPlaceholderUrl;
+          return MORSEL_PLACEHOLDER;
         }
       };
 
@@ -61,7 +54,7 @@ angular.module( 'Morsel.common.modal.morsel', [] )
         if(user.photos) {
           return user.photos._40x40;
         } else {
-          return userPlaceholderUrl;
+          return USER_PLACEHOLDER;
         }
       };
 

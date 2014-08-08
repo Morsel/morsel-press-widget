@@ -2,18 +2,16 @@
   "name": "ng-boilerplate",
   "version": "1.0.0",
   "devDependencies": {
-    "angular": "~1.2",
     "angular-mocks": "~1.2",
-    "bootstrap": "~3.1",
-    "angular-bootstrap": "~0.10.0",
-    "angular-ui-router": "~0.2",
-    "bootstrap-sass-official": "~3.2.0"
+    "bootstrap-sass-official": "~3.2.0",
+    "jquery": "~2.1.1"
   },
   "dependencies": {
+    "angular": "~1.2",
+    "angular-ui-router": "~0.2",
     "iframe-resizer": "~2.5.2",
     "underscore": "~1.6.0",
     "imagesloaded": "~3.1.8",
-    "jquery": "~2.1.1",
     "angular-sanitize": "~1.2.20",
     "angular-bindonce": "~0.3.1",
     "jschannel": "git@github.com:mozilla/jschannel.git"
