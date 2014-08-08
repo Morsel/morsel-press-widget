@@ -59,10 +59,6 @@
     height: 100%;
   }
 
-  .item-img {
-    background-image: url($morselPlaceholder);
-  }
-
   .morsel-full .morsel-title {
     padding: 45px 20px 15px;
     font-size: 22px;
@@ -179,6 +175,11 @@
       left: 0;
       right: 0;
       bottom: 0;
+      background-image: url($morselPlaceholder);
+
+      &.image-loaded {
+        background: none;
+      }
 
       div {
         display: table-cell;
