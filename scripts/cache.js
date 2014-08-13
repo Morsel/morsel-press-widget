@@ -16,7 +16,7 @@ AWS.config.update({accessKeyId: AWS_ACCESS_KEY_ID, secretAccessKey: AWS_SECRET_A
 
 var s3 = new AWS.S3();
 
-var placeIds = [8,4,7];
+var placeIds = [8,4,31];
 var maxMorsels = 50;
 
 _.each(placeIds, function(placeId) {
