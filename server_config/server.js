@@ -78,7 +78,7 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
     var _ = require('underscore');
     var app = express();
     var port = Number(process.env.PORT || 5000);
-    var apiUrl = 'http://api.eatmorsel.com';//always use prod for this, shouldn't need staging
+    var apiUrl = 'https://api.eatmorsel.com';//always use prod for this, shouldn't need staging
     var morselDomain = nodeEnv === 'production' ? 'http://widget.eatmorsel.com' : 'http://localhost:' + port;
 
     app.use(logfmt.requestLogger());
@@ -154,7 +154,7 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
     });
 
     app.get('/', function(req, res){
-      res.redirect('http://www.eatmorsel.com');
+      res.redirect('https://www.eatmorsel.com');
     });
 
     app.get('*', function(req, res){
