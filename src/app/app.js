@@ -19,7 +19,7 @@ angular.module( 'Morsel.pressWidget', [
 
 .constant('EXPANDED_MODAL_HEIGHT', 390)
 .constant('CACHE_URL', 'https://s3.amazonaws.com/morsel-press-kit/cache')
-.constant('MORSEL_PLACEHOLDER', '/assets/images/util/morsel-placeholder_480x480.jpg')
+.constant('MORSEL_PLACEHOLDER', '/assets/images/util/morsel-placeholder_640x640.jpg')
 .constant('USER_PLACEHOLDER', '/assets/images/util/avatars/avatar_40x40.jpg')
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
