@@ -34,7 +34,7 @@ angular.module( 'Morsel.common.modal.morsel', [] )
         });
 
         //expose this for our share page
-        scope.coverPhotoStyle = {'background-image':'url('+morselUtils.getCoverPhoto(scope.morsel, '_480x480')+')'};
+        scope.coverPhotoStyle = {'background-image':'url('+morselUtils.getCoverPhoto(scope.morsel, '_640x640')+')'};
       });
 
       $timeout(function(){
@@ -51,7 +51,7 @@ angular.module( 'Morsel.common.modal.morsel', [] )
 
       scope.getItemPhoto = function(item) {
         if(item.photos) {
-          return item.photos._480x480;
+          return item.photos._640x640;
         } else {
           return MORSEL_PLACEHOLDER;
         }
