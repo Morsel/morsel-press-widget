@@ -14,26 +14,18 @@ angular.module( 'Morsel.common.morselSharing', [] )
         var primaryItem,
             lastItemWithPhotos;
 
+        primaryItemPhotos = scope.morsel && scope.morsel.primary_item_photos ? morsel.primary_item_photos : null;
         primaryItem = _.find(scope.morsel.items, function(i) {
           return i.id === scope.morsel.primary_item_id;
         });
 
         //use their cover photo if there is one
-        if(primaryItem && primaryItem.photos) {
-          return primaryItem.photos._992x992;
+        if(primaryItemPhotos && primaryItemPhotos._992x992) {
+          return primaryItemPhotos._992x992;
         } else {
-          //if not, use last item with a photo
-          lastItemWithPhotos = findLastItemWithPhotos(scope.morsel.items);
-          return lastItemWithPhotos ? lastItemWithPhotos.photos._992x992 : MORSELPLACEHOLDER;
+          //if not, use placeholder
+          return MORSELPLACEHOLDER;
         }
-      }
-
-      function findLastItemWithPhotos(items) {
-        var reverseItems = items.slice(0);
-
-        return _.find(reverseItems, function(i) {
-          return i.photos;
-        });
       }
 
       scope.shareSocial = function(socialType) {
