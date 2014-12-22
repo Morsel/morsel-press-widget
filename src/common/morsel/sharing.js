@@ -11,13 +11,9 @@ angular.module( 'Morsel.common.morselSharing', [] )
     link: function(scope, element, attrs) {
 
       function getMediaImage() {
-        var primaryItem,
-            lastItemWithPhotos;
+        var primaryItemPhotos;
 
-        primaryItemPhotos = scope.morsel && scope.morsel.primary_item_photos ? morsel.primary_item_photos : null;
-        primaryItem = _.find(scope.morsel.items, function(i) {
-          return i.id === scope.morsel.primary_item_id;
-        });
+        primaryItemPhotos = scope.morsel && scope.morsel.primary_item_photos ? scope.morsel.primary_item_photos : null;
 
         //use their cover photo if there is one
         if(primaryItemPhotos && primaryItemPhotos._992x992) {
