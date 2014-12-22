@@ -7,7 +7,7 @@ var AWS = require('aws-sdk');
 var rootBucket = 'morsel-press-kit/cache';
 var cacheDir = './cache';
 
-var apiUrl = 'http://api.eatmorsel.com';
+var apiUrl = 'https://api.eatmorsel.com';
 
 var AWS_ACCESS_KEY_ID = config.AWS_ACCESS_KEY_ID;
 var AWS_SECRET_ACCESS_KEY = config.AWS_SECRET_ACCESS_KEY;
@@ -16,10 +16,12 @@ AWS.config.update({accessKeyId: AWS_ACCESS_KEY_ID, secretAccessKey: AWS_SECRET_A
 
 var s3 = new AWS.S3();
 
-var placeIds = [8,4,31,25,94,27];
+var placeIds = [8,4];//,31,25,94,27];
 var maxMorsels = 50;
 
 _.each(placeIds, function(placeId) {
+  console.log('getting place '+placeId+' from api');
+
   request(apiUrl+'/places/'+placeId+'/morsels.json?count='+maxMorsels+'&client%5Bdevice%5D=pressKitCaching', function (error, response, body) {
     var gridBucket,
         gridFile,
@@ -36,6 +38,7 @@ _.each(placeIds, function(placeId) {
       gridLocalCacheDir = cacheDir+gridDir;
 
       //save a local copy for debugging
+      console.log('writing grid for place '+placeId+' locally');
       fs.writeFile(gridLocalCacheDir+'/'+gridFile, minifiedGridJson, function(err) {
         if(err) {
           console.log(err);
@@ -44,6 +47,7 @@ _.each(placeIds, function(placeId) {
         }
       });
 
+      console.log('writing grid for place '+placeId+' to s3');
       s3.putObject({
         Bucket: gridBucket,
         Key: gridFile,
@@ -62,6 +66,9 @@ _.each(placeIds, function(placeId) {
       });
 
       _.each(JSON.parse(minifiedGridJson).data, function(m){
+        console.log('getting morsel '+m.id+' from api');
+
+
         request(apiUrl+'/morsels/'+m.id+'.json?client%5Bdevice%5D=pressKitCaching', function (error, response, body) {
           var morselBucket,
               morselFile,
@@ -77,6 +84,7 @@ _.each(placeIds, function(placeId) {
             morselFileContents = 'morselCallback('+minifiedMorselJson+');';
             morselLocalCacheDir = cacheDir+morselDir;
 
+            console.log('writing grid for morsel '+m.id+' locally');
             fs.writeFile(morselLocalCacheDir+'/'+morselFile, minifiedMorselJson, function(err) {
               if(err) {
                 console.log(err);
@@ -85,6 +93,7 @@ _.each(placeIds, function(placeId) {
               }
             });
 
+            console.log('writing grid for morsel '+m.id+' to s3');
             //push a copy to amazon
             s3.putObject({
               Bucket: morselBucket,
