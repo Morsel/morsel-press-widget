@@ -41,6 +41,7 @@
     "grunt-shell": "~0.7.0",
     "aws-sdk": "~2.0.9",
     "grunt-execute": "~0.2.2",
-    "jsonminify": "~0.2.3"
+    "jsonminify": "~0.2.3",
+    "q": "~1.0.1"
   }
 }
